@@ -1,0 +1,197 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                    LINUX COMMAND AGENT - SYSTEM OVERVIEW                      ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              PROJECT STRUCTURE                                │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  📁 sample.ai/                                                                │
+│   │                                                                           │
+│   ├── 📄 agent.py                    [12KB] Main agent implementation        │
+│   │   └── Classes:                                                           │
+│   │       • LinuxCommandAgent       - Core orchestrator                      │
+│   │       • LinuxCommandDatabase    - Command knowledge base                 │
+│   │       • LLMInterface            - OpenAI API wrapper                     │
+│   │       • CommandResult           - Execution results                      │
+│   │                                                                           │
+│   ├── 📄 linux_commands_db.json     [16KB] 60+ Linux commands                │
+│   │   └── Structure: command -> {description, usage, tags, examples}        │
+│   │                                                                           │
+│   ├── 📄 config.json                [549B] System configuration              │
+│   │   └── LLM settings, security rules, timeouts                            │
+│   │                                                                           │
+│   ├── 📄 demo.py                    [3.5KB] Interactive demo script          │
+│   │   └── Runs 7 test queries with formatted output                         │
+│   │                                                                           │
+│   ├── 📄 quickstart.sh              [2.8KB] Setup and launch script          │
+│   │   └── Checks dependencies, offers options                               │
+│   │                                                                           │
+│   ├── 📄 requirements.txt           [196B] Python dependencies               │
+│   │   └── openai>=1.0.0                                                      │
+│   │                                                                           │
+│   ├── 📄 .env.example               [163B] Environment template              │
+│   │   └── OPENAI_API_KEY configuration                                      │
+│   │                                                                           │
+│   ├── 📄 .gitignore                 [327B] Git exclusions                    │
+│   │                                                                           │
+│   ├── 📄 README.md                  [8.5KB] Complete documentation           │
+│   │   └── Installation, usage, examples, troubleshooting                    │
+│   │                                                                           │
+│   ├── 📄 ARCHITECTURE.md            [14KB] System design documentation       │
+│   │   └── Components, data flow, security, extension points                 │
+│   │                                                                           │
+│   └── 📄 QUICKREF.md                [5.8KB] Quick reference guide            │
+│       └── Common queries, tips, troubleshooting                              │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              SYSTEM WORKFLOW                                  │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ┌─────────────────┐                                                         │
+│  │  User Query     │  "help me show list of files in directory"             │
+│  │  (Natural Lang) │                                                         │
+│  └────────┬────────┘                                                         │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ LinuxCommand    │  1. Parse query                                         │
+│  │ Agent           │  2. Search database for relevant commands               │
+│  └────────┬────────┘     Tags: ["files", "directory", "list"]               │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ Database        │  Returns: ls, find, grep commands with context         │
+│  │ Search          │                                                         │
+│  └────────┬────────┘                                                         │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ LLM Interface   │  Prompt: "User query: ... Relevant commands: ..."      │
+│  │ (OpenAI/Mock)   │  Model: GPT-4 or pattern matching                      │
+│  └────────┬────────┘                                                         │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ Command         │  Generated: "ls -la"                                    │
+│  │ Generated       │                                                         │
+│  └────────┬────────┘                                                         │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ Safety Check    │  ❌ Block: rm -rf /, mkfs, etc.                         │
+│  │                 │  ✅ Allow: ls, pwd, df, ps, etc.                        │
+│  └────────┬────────┘                                                         │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ Execute         │  subprocess.run("ls -la", timeout=30s)                  │
+│  │ Command         │                                                         │
+│  └────────┬────────┘                                                         │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ Result          │  stdout: [file listing]                                 │
+│  │ Processing      │  stderr: []                                             │
+│  │                 │  success: True                                          │
+│  └────────┬────────┘                                                         │
+│           │                                                                   │
+│           v                                                                   │
+│  ┌─────────────────┐                                                         │
+│  │ Response        │  Command: ls -la                                        │
+│  │ to User         │  Output: [formatted file listing]                       │
+│  └─────────────────┘                                                         │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              USAGE MODES                                      │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  1️⃣  INTERACTIVE MODE                                                         │
+│      $ python agent.py                                                        │
+│      Query> show disk space                                                   │
+│      Command: df -h                                                           │
+│      [output...]                                                              │
+│                                                                               │
+│  2️⃣  COMMAND LINE MODE                                                        │
+│      $ python agent.py "show running processes"                               │
+│      Command: ps aux                                                          │
+│      [output...]                                                              │
+│                                                                               │
+│  3️⃣  DEMO MODE                                                                │
+│      $ python demo.py                                                         │
+│      [Runs 7 test queries automatically]                                      │
+│                                                                               │
+│  4️⃣  QUICK START                                                              │
+│      $ ./quickstart.sh                                                        │
+│      [Interactive setup and demo]                                             │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              KEY FEATURES                                     │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ✅ Natural Language Processing    Convert plain English to Linux commands   │
+│  ✅ 60+ Command Database           Comprehensive Linux command knowledge      │
+│  ✅ LLM Integration                OpenAI GPT-4 powered reasoning             │
+│  ✅ Mock Mode                      Works without API key (pattern matching)   │
+│  ✅ Safety Checks                  Blocks dangerous commands automatically    │
+│  ✅ Command History                Track all executed commands               │
+│  ✅ Interactive & CLI Modes        Flexible usage options                     │
+│  ✅ Timeout Protection             30s limit on command execution             │
+│  ✅ Error Handling                 Graceful failure with helpful messages     │
+│  ✅ Comprehensive Docs             README, Architecture, Quick Ref guides     │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                          QUICK START GUIDE                                    │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  Step 1: Install Dependencies                                                 │
+│  $ pip install -r requirements.txt                                            │
+│                                                                               │
+│  Step 2: (Optional) Set API Key                                               │
+│  $ export OPENAI_API_KEY='sk-...'                                             │
+│                                                                               │
+│  Step 3: Run the Agent                                                        │
+│  $ python agent.py                                                            │
+│                                                                               │
+│  Or use quick start:                                                          │
+│  $ ./quickstart.sh                                                            │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                          EXAMPLE QUERIES                                      │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  📁 Files:           "show list of files in directory"        → ls -la       │
+│  📊 Disk Space:      "show disk space usage"                  → df -h        │
+│  💾 Memory:          "show memory usage"                      → free -h      │
+│  ⚙️  Processes:       "show running processes"                 → ps aux       │
+│  🌐 Network:         "show network connections"               → netstat -tuln│
+│  🔍 Search:          "find all python files"                  → find . -name │
+│  📍 Location:        "what's my current directory"            → pwd          │
+│  ℹ️  System Info:    "show system information"                → uname -a     │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                          DOCUMENTATION FILES                                  │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  📖 README.md         - Complete user documentation and setup guide          │
+│  🏗️  ARCHITECTURE.md   - System design, components, data flow                │
+│  ⚡ QUICKREF.md       - Quick reference for common tasks                     │
+│  🎬 PROJECT_VISUAL    - This file - visual overview                          │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                    🚀 READY TO USE! Run ./quickstart.sh                       ║
+╚═══════════════════════════════════════════════════════════════════════════════╝

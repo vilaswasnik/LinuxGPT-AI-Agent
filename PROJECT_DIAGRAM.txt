@@ -1,0 +1,250 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    LINUX COMMAND AGENT - SYSTEM ARCHITECTURE                 ║
+║                   Natural Language → Linux Command Converter                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                              USER INTERFACE LAYER                            │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                          Natural Language Query
+                          "show disk space"
+                          "find large files"
+                                      │
+                                      ▼
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          LINUX COMMAND AGENT (agent.py)                      ║
+║ ┌──────────────────────────────────────────────────────────────────────────┐ ║
+║ │  Main Processing Flow:                                                   │ ║
+║ │  1. Receive query                                                        │ ║
+║ │  2. Search command database                                              │ ║
+║ │  3. Query LLM with context                                               │ ║
+║ │  4. Safety validation                                                    │ ║
+║ │  5. Execute command                                                      │ ║
+║ │  6. Return result + educational info                                     │ ║
+║ └──────────────────────────────────────────────────────────────────────────┘ ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+           │                          │                          │
+           │                          │                          │
+           ▼                          ▼                          ▼
+┌─────────────────────┐   ┌──────────────────────┐   ┌────────────────────────┐
+│  LinuxCommandDatabase│   │   LLMInterface       │   │  CommandResult         │
+│  ─────────────────── │   │   ──────────────     │   │  ─────────────         │
+│                      │   │                      │   │                        │
+│  • Load JSON DB      │   │  • OpenAI GPT-4      │   │  • success: bool       │
+│  • Search by tags    │   │  • Mock fallback     │   │  • output: str         │
+│  • Get details       │   │  • Pattern matching  │   │  • error: str          │
+│  • Find combinations │   │  • Query processing  │   │  • command: str        │
+│                      │   │                      │   │                        │
+│  Methods:            │   │  Methods:            │   │  Usage:                │
+│  • search()          │   │  • query()           │   │  • Capture exec result │
+│  • get_command_      │   │  • _mock_llm_        │   │  • Track history       │
+│    details()         │   │    response()        │   │  • Error handling      │
+│  • get_combinations()│   │                      │   │                        │
+└─────────────────────┘   └──────────────────────┘   └────────────────────────┘
+           │                          │
+           │                          │
+           ▼                          ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                              DATA & CONFIGURATION                            │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────────────────────┐  ┌────────────────────────────────────┐   │
+│  │ linux_commands_db_           │  │  .env                              │   │
+│  │ comprehensive.json           │  │  ────                              │   │
+│  │ ────────────────────────     │  │                                    │   │
+│  │                              │  │  OPENAI_API_KEY=sk-...             │   │
+│  │  60+ Commands:               │  │  OPENAI_MODEL=gpt-4                │   │
+│  │  • ls, grep, find, ps        │  │                                    │   │
+│  │  • df, du, top, netstat      │  │  Loaded by: python-dotenv          │   │
+│  │  • lsblk, fdisk, iostat      │  └────────────────────────────────────┘   │
+│  │  • vmstat, lsof, dmesg       │                                           │
+│  │                              │  ┌────────────────────────────────────┐   │
+│  │  30+ Combinations:           │  │  config.json                       │   │
+│  │  • Pipeline examples         │  │  ───────────                       │   │
+│  │  • Real-world scenarios      │  │                                    │   │
+│  │                              │  │  • LLM settings                    │   │
+│  │  Educational Data:           │  │  • Security patterns               │   │
+│  │  • Description               │  │  • Timeout config                  │   │
+│  │  • Usage patterns            │  │  • Dangerous command blocks        │   │
+│  │  • Common options            │  └────────────────────────────────────┘   │
+│  │  • Examples with explanations│                                           │
+│  │  • Tips & best practices     │                                           │
+│  └─────────────────────────────┘                                            │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                            EXECUTION & SAFETY LAYER                          │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────────────────────────────────────────────────────────┐        │
+│  │  Security Validation                                            │        │
+│  │  ───────────────────                                            │        │
+│  │                                                                 │        │
+│  │  Blocked Patterns:                                              │        │
+│  │  • rm -rf /                                                     │        │
+│  │  • mkfs (format disk)                                           │        │
+│  │  • Fork bombs                                                   │        │
+│  │  • dd if=/dev/random                                            │        │
+│  │  • chmod -R 777 /                                               │        │
+│  └─────────────────────────────────────────────────────────────────┘        │
+│                              ▼                                               │
+│  ┌─────────────────────────────────────────────────────────────────┐        │
+│  │  subprocess.run()                                               │        │
+│  │  ────────────────                                               │        │
+│  │                                                                 │        │
+│  │  • Execute in shell                                             │        │
+│  │  • Capture stdout/stderr                                        │        │
+│  │  • 30-second timeout                                            │        │
+│  │  • Return exit code                                             │        │
+│  └─────────────────────────────────────────────────────────────────┘        │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                            OUTPUT & EDUCATION LAYER                          │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────────────────────────────────────────────────────┐            │
+│  │  Educational Display (if enabled)                           │            │
+│  │  ────────────────────────────                               │            │
+│  │                                                             │            │
+│  │  📚 Command: ls                                             │            │
+│  │     Description: List directory contents                    │            │
+│  │                                                             │            │
+│  │     Common Options:                                         │            │
+│  │     -l: Long format                                         │            │
+│  │     -a: Show hidden files                                   │            │
+│  │     -h: Human-readable sizes                                │            │
+│  │                                                             │            │
+│  │     💡 Tip: Combine with grep to filter results             │            │
+│  └─────────────────────────────────────────────────────────────┘            │
+│                              ▼                                               │
+│  ┌─────────────────────────────────────────────────────────────┐            │
+│  │  Command Output                                             │            │
+│  │  ──────────────                                             │            │
+│  │                                                             │            │
+│  │  drwxr-xr-x  5 user user 4096 Nov 21 10:30 .               │            │
+│  │  drwxr-xr-x 12 user user 4096 Nov 20 14:22 ..              │            │
+│  │  -rw-r--r--  1 user user  523 Nov 21 09:15 agent.py        │            │
+│  │  -rw-r--r--  1 user user  142 Nov 20 16:30 config.json     │            │
+│  └─────────────────────────────────────────────────────────────┘            │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            SPECIAL FEATURES                                  ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  1. Command History                    4. Educational Mode                  ║
+║     • Track all queries                   • Auto-explanations              ║
+║     • View past commands                  • Tips & best practices          ║
+║     • Success/failure tracking            • Example usage                  ║
+║                                                                              ║
+║  2. Combinations Viewer                5. Mock Mode Fallback               ║
+║     • 30+ real-world pipelines           • Works without API key           ║
+║     • grep + find patterns               • 25+ pattern matchers            ║
+║     • awk, sed, cut examples             • Direct command support          ║
+║                                                                              ║
+║  3. Explain Command                    6. Safety & Security                ║
+║     • explain <command>                  • Dangerous command blocking      ║
+║     • Detailed information               • Execution timeout               ║
+║     • All options documented             • Error handling                  ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                              PROJECT FILES                                   │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  Core Files:                         Documentation:                         │
+│  ───────────                         ──────────────                         │
+│  • agent.py                 (537 lines)   • README.md                       │
+│  • demo.py                  (test script) • ARCHITECTURE.md                 │
+│  • test_openai.py          (API tester)   • QUICKREF.md                     │
+│  • quickstart.sh           (setup tool)   • EDUCATIONAL_FEATURES.md         │
+│                                                                              │
+│  Data & Config:                      Environment:                           │
+│  ───────────────                     ────────────                           │
+│  • linux_commands_db_comprehensive.json   • .env (API key)                  │
+│  • linux_commands_db.json (fallback)      • requirements.txt                │
+│  • config.json                            • python-dotenv                   │
+│                                           • openai>=1.0.0                   │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            DATA FLOW DIAGRAM                                 ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║   User Input                                                                 ║
+║      │                                                                       ║
+║      ▼                                                                       ║
+║   ┌─────────────────┐                                                       ║
+║   │ Query Parser    │───────────────┐                                       ║
+║   └─────────────────┘               │                                       ║
+║      │                              │                                       ║
+║      ▼                              ▼                                       ║
+║   ┌─────────────────┐        ┌──────────────┐                              ║
+║   │ Database Search │        │ LLM Query    │                              ║
+║   │ (Tags/Keywords) │        │ (GPT-4/Mock) │                              ║
+║   └─────────────────┘        └──────────────┘                              ║
+║      │                              │                                       ║
+║      └──────────┬───────────────────┘                                       ║
+║                 ▼                                                           ║
+║          ┌──────────────┐                                                   ║
+║          │ Command Gen  │                                                   ║
+║          └──────────────┘                                                   ║
+║                 │                                                           ║
+║                 ▼                                                           ║
+║          ┌──────────────┐                                                   ║
+║          │ Safety Check │─────No──▶ Block & Warn                           ║
+║          └──────────────┘                                                   ║
+║                 │ Yes                                                       ║
+║                 ▼                                                           ║
+║          ┌──────────────┐                                                   ║
+║          │ Execute      │                                                   ║
+║          │ (subprocess) │                                                   ║
+║          └──────────────┘                                                   ║
+║                 │                                                           ║
+║                 ▼                                                           ║
+║          ┌──────────────┐                                                   ║
+║          │ Format Output│                                                   ║
+║          │ + Education  │                                                   ║
+║          └──────────────┘                                                   ║
+║                 │                                                           ║
+║                 ▼                                                           ║
+║            User Output                                                      ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         COMMAND CATEGORIES COVERED                           │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  📁 File Operations      💾 Disk Management      🔍 Search & Text           │
+│  ─────────────────       ─────────────────       ────────────────           │
+│  • ls, cat, cp, mv       • df, du, lsblk         • grep, find, locate       │
+│  • rm, touch, chmod      • fdisk, parted         • awk, sed, cut            │
+│  • mkdir, rmdir          • mkfs, blkid           • wc, sort, uniq           │
+│                                                                              │
+│  ⚙️  System Info          🌐 Network              📦 Archives               │
+│  ──────────────          ─────────               ─────────                  │
+│  • ps, top, htop         • ping, netstat         • tar, zip, gzip           │
+│  • free, uptime          • curl, wget            • unzip, bzip2             │
+│  • uname, hostname       • ss, ip, ifconfig      • 7z, xz                   │
+│  • vmstat, iostat        • lsof (ports)          •                          │
+│                                                                              │
+│  👤 User Management      📊 Performance          📝 Logs                     │
+│  ─────────────────       ─────────────           ──────                     │
+│  • whoami, who           • iostat, vmstat        • dmesg, journalctl        │
+│  • useradd, passwd       • sar, mpstat           • tail, head, less         │
+│  • groups, id            • top, htop             • syslog, messages         │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+         ╔════════════════════════════════════════════════════════╗
+         ║  Total: 60+ Commands | 30+ Combinations | 200+ Examples ║
+         ╚════════════════════════════════════════════════════════╝

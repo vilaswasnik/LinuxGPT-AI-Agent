@@ -1,0 +1,584 @@
+{
+  "ls": {
+    "description": "List directory contents",
+    "usage": "ls [OPTIONS] [FILE]...",
+    "tags": ["files", "directory", "list", "show"],
+    "examples": [
+      "ls -la",
+      "ls -lh /var/log",
+      "ls -lt"
+    ]
+  },
+  "cd": {
+    "description": "Change directory",
+    "usage": "cd [DIRECTORY]",
+    "tags": ["directory", "navigate", "change"],
+    "examples": [
+      "cd /home/user",
+      "cd ..",
+      "cd ~"
+    ]
+  },
+  "pwd": {
+    "description": "Print working directory - show current directory path",
+    "usage": "pwd",
+    "tags": ["directory", "current", "path", "location"],
+    "examples": [
+      "pwd"
+    ]
+  },
+  "cat": {
+    "description": "Concatenate and display file contents",
+    "usage": "cat [FILE]...",
+    "tags": ["file", "read", "display", "show", "content"],
+    "examples": [
+      "cat file.txt",
+      "cat file1.txt file2.txt"
+    ]
+  },
+  "grep": {
+    "description": "Search text using patterns",
+    "usage": "grep [OPTIONS] PATTERN [FILE]...",
+    "tags": ["search", "find", "text", "pattern"],
+    "examples": [
+      "grep 'error' logfile.txt",
+      "grep -r 'TODO' .",
+      "grep -i 'warning' *.log"
+    ]
+  },
+  "find": {
+    "description": "Search for files in directory hierarchy",
+    "usage": "find [PATH] [OPTIONS]",
+    "tags": ["search", "file", "locate"],
+    "examples": [
+      "find . -name '*.txt'",
+      "find /home -type f -mtime -7",
+      "find . -size +10M"
+    ]
+  },
+  "df": {
+    "description": "Report file system disk space usage",
+    "usage": "df [OPTIONS] [FILE]...",
+    "tags": ["disk", "space", "usage", "storage"],
+    "examples": [
+      "df -h",
+      "df -i"
+    ]
+  },
+  "du": {
+    "description": "Estimate file space usage",
+    "usage": "du [OPTIONS] [FILE]...",
+    "tags": ["disk", "usage", "size", "directory"],
+    "examples": [
+      "du -sh *",
+      "du -h --max-depth=1",
+      "du -ah | sort -rh | head -20"
+    ]
+  },
+  "ps": {
+    "description": "Report process status",
+    "usage": "ps [OPTIONS]",
+    "tags": ["process", "running", "tasks", "list"],
+    "examples": [
+      "ps aux",
+      "ps -ef",
+      "ps aux | grep nginx"
+    ]
+  },
+  "top": {
+    "description": "Display Linux processes in real-time",
+    "usage": "top [OPTIONS]",
+    "tags": ["process", "monitor", "cpu", "memory", "performance"],
+    "examples": [
+      "top",
+      "top -u username"
+    ]
+  },
+  "htop": {
+    "description": "Interactive process viewer (enhanced top)",
+    "usage": "htop [OPTIONS]",
+    "tags": ["process", "monitor", "interactive", "cpu", "memory"],
+    "examples": [
+      "htop",
+      "htop -u username"
+    ]
+  },
+  "free": {
+    "description": "Display amount of free and used memory",
+    "usage": "free [OPTIONS]",
+    "tags": ["memory", "ram", "usage", "available"],
+    "examples": [
+      "free -h",
+      "free -m",
+      "free -g"
+    ]
+  },
+  "netstat": {
+    "description": "Print network connections, routing tables, interface statistics",
+    "usage": "netstat [OPTIONS]",
+    "tags": ["network", "connections", "ports", "sockets"],
+    "examples": [
+      "netstat -tuln",
+      "netstat -an",
+      "netstat -rn"
+    ]
+  },
+  "ss": {
+    "description": "Socket statistics - replacement for netstat",
+    "usage": "ss [OPTIONS]",
+    "tags": ["network", "connections", "sockets", "ports"],
+    "examples": [
+      "ss -tuln",
+      "ss -s",
+      "ss -tan"
+    ]
+  },
+  "ifconfig": {
+    "description": "Configure network interface",
+    "usage": "ifconfig [INTERFACE] [OPTIONS]",
+    "tags": ["network", "interface", "ip", "configuration"],
+    "examples": [
+      "ifconfig",
+      "ifconfig eth0",
+      "ifconfig -a"
+    ]
+  },
+  "ip": {
+    "description": "Show/manipulate routing, devices, policy routing and tunnels",
+    "usage": "ip [OPTIONS] OBJECT COMMAND",
+    "tags": ["network", "interface", "routing", "ip address"],
+    "examples": [
+      "ip addr show",
+      "ip route show",
+      "ip link show"
+    ]
+  },
+  "ping": {
+    "description": "Send ICMP ECHO_REQUEST to network hosts",
+    "usage": "ping [OPTIONS] destination",
+    "tags": ["network", "connectivity", "test", "reachability"],
+    "examples": [
+      "ping google.com",
+      "ping -c 4 8.8.8.8",
+      "ping -i 2 localhost"
+    ]
+  },
+  "curl": {
+    "description": "Transfer data from or to a server",
+    "usage": "curl [OPTIONS] [URL]",
+    "tags": ["http", "download", "api", "web", "request"],
+    "examples": [
+      "curl https://example.com",
+      "curl -I https://example.com",
+      "curl -X POST -d 'data' https://api.example.com"
+    ]
+  },
+  "wget": {
+    "description": "Download files from the web",
+    "usage": "wget [OPTIONS] [URL]",
+    "tags": ["download", "web", "http", "fetch"],
+    "examples": [
+      "wget https://example.com/file.zip",
+      "wget -r https://example.com",
+      "wget -c https://example.com/large-file.iso"
+    ]
+  },
+  "tar": {
+    "description": "Archive files",
+    "usage": "tar [OPTIONS] [FILE]...",
+    "tags": ["archive", "compress", "extract", "backup"],
+    "examples": [
+      "tar -czf archive.tar.gz directory/",
+      "tar -xzf archive.tar.gz",
+      "tar -tzf archive.tar.gz"
+    ]
+  },
+  "zip": {
+    "description": "Package and compress files",
+    "usage": "zip [OPTIONS] zipfile files...",
+    "tags": ["compress", "archive", "package"],
+    "examples": [
+      "zip archive.zip file1.txt file2.txt",
+      "zip -r archive.zip directory/",
+      "zip -e secure.zip sensitive.txt"
+    ]
+  },
+  "unzip": {
+    "description": "Extract compressed files",
+    "usage": "unzip [OPTIONS] file.zip",
+    "tags": ["extract", "decompress", "archive"],
+    "examples": [
+      "unzip archive.zip",
+      "unzip -l archive.zip",
+      "unzip archive.zip -d /path/to/directory"
+    ]
+  },
+  "chmod": {
+    "description": "Change file permissions",
+    "usage": "chmod [OPTIONS] MODE FILE...",
+    "tags": ["permissions", "access", "rights", "security"],
+    "examples": [
+      "chmod 755 script.sh",
+      "chmod +x file.sh",
+      "chmod -R 644 directory/"
+    ]
+  },
+  "chown": {
+    "description": "Change file owner and group",
+    "usage": "chown [OPTIONS] OWNER[:GROUP] FILE...",
+    "tags": ["ownership", "user", "group", "permissions"],
+    "examples": [
+      "chown user file.txt",
+      "chown user:group file.txt",
+      "chown -R user:group directory/"
+    ]
+  },
+  "mkdir": {
+    "description": "Make directories",
+    "usage": "mkdir [OPTIONS] DIRECTORY...",
+    "tags": ["directory", "create", "folder"],
+    "examples": [
+      "mkdir new_directory",
+      "mkdir -p path/to/nested/directory",
+      "mkdir -m 755 directory"
+    ]
+  },
+  "rm": {
+    "description": "Remove files or directories",
+    "usage": "rm [OPTIONS] FILE...",
+    "tags": ["delete", "remove", "erase"],
+    "examples": [
+      "rm file.txt",
+      "rm -r directory/",
+      "rm -f file.txt"
+    ]
+  },
+  "cp": {
+    "description": "Copy files and directories",
+    "usage": "cp [OPTIONS] SOURCE DEST",
+    "tags": ["copy", "duplicate", "backup"],
+    "examples": [
+      "cp file.txt backup.txt",
+      "cp -r source_dir/ dest_dir/",
+      "cp -p file.txt /backup/"
+    ]
+  },
+  "mv": {
+    "description": "Move or rename files",
+    "usage": "mv [OPTIONS] SOURCE DEST",
+    "tags": ["move", "rename", "relocate"],
+    "examples": [
+      "mv oldname.txt newname.txt",
+      "mv file.txt /path/to/destination/",
+      "mv *.txt text_files/"
+    ]
+  },
+  "touch": {
+    "description": "Create empty file or update timestamp",
+    "usage": "touch [OPTIONS] FILE...",
+    "tags": ["create", "file", "timestamp"],
+    "examples": [
+      "touch newfile.txt",
+      "touch file1.txt file2.txt file3.txt"
+    ]
+  },
+  "head": {
+    "description": "Output the first part of files",
+    "usage": "head [OPTIONS] [FILE]...",
+    "tags": ["file", "read", "beginning", "preview"],
+    "examples": [
+      "head file.txt",
+      "head -n 20 file.txt",
+      "head -c 100 file.txt"
+    ]
+  },
+  "tail": {
+    "description": "Output the last part of files",
+    "usage": "tail [OPTIONS] [FILE]...",
+    "tags": ["file", "read", "end", "log", "monitor"],
+    "examples": [
+      "tail file.txt",
+      "tail -n 50 logfile.log",
+      "tail -f /var/log/syslog"
+    ]
+  },
+  "wc": {
+    "description": "Print newline, word, and byte counts for files",
+    "usage": "wc [OPTIONS] [FILE]...",
+    "tags": ["count", "lines", "words", "characters"],
+    "examples": [
+      "wc file.txt",
+      "wc -l file.txt",
+      "wc -w document.txt"
+    ]
+  },
+  "sort": {
+    "description": "Sort lines of text files",
+    "usage": "sort [OPTIONS] [FILE]...",
+    "tags": ["sort", "order", "arrange"],
+    "examples": [
+      "sort file.txt",
+      "sort -r file.txt",
+      "sort -n numbers.txt"
+    ]
+  },
+  "uniq": {
+    "description": "Report or omit repeated lines",
+    "usage": "uniq [OPTIONS] [INPUT [OUTPUT]]",
+    "tags": ["unique", "duplicate", "filter"],
+    "examples": [
+      "uniq file.txt",
+      "sort file.txt | uniq",
+      "uniq -c file.txt"
+    ]
+  },
+  "diff": {
+    "description": "Compare files line by line",
+    "usage": "diff [OPTIONS] FILE1 FILE2",
+    "tags": ["compare", "difference", "changes"],
+    "examples": [
+      "diff file1.txt file2.txt",
+      "diff -u original.txt modified.txt",
+      "diff -r dir1/ dir2/"
+    ]
+  },
+  "locate": {
+    "description": "Find files by name quickly",
+    "usage": "locate [OPTIONS] PATTERN...",
+    "tags": ["search", "find", "file", "quick"],
+    "examples": [
+      "locate file.txt",
+      "locate -i *.pdf",
+      "locate -c '*.log'"
+    ]
+  },
+  "which": {
+    "description": "Locate a command",
+    "usage": "which [OPTIONS] COMMAND...",
+    "tags": ["command", "path", "location", "binary"],
+    "examples": [
+      "which python",
+      "which -a python",
+      "which bash"
+    ]
+  },
+  "whereis": {
+    "description": "Locate the binary, source, and manual page files for a command",
+    "usage": "whereis [OPTIONS] COMMAND...",
+    "tags": ["command", "binary", "manual", "locate"],
+    "examples": [
+      "whereis bash",
+      "whereis python",
+      "whereis -b ls"
+    ]
+  },
+  "uname": {
+    "description": "Print system information",
+    "usage": "uname [OPTIONS]",
+    "tags": ["system", "information", "kernel", "os"],
+    "examples": [
+      "uname -a",
+      "uname -r",
+      "uname -s"
+    ]
+  },
+  "hostname": {
+    "description": "Show or set the system's hostname",
+    "usage": "hostname [OPTIONS] [NAME]",
+    "tags": ["system", "name", "host", "network"],
+    "examples": [
+      "hostname",
+      "hostname -f",
+      "hostname -I"
+    ]
+  },
+  "uptime": {
+    "description": "Show how long the system has been running",
+    "usage": "uptime [OPTIONS]",
+    "tags": ["system", "running", "load", "time"],
+    "examples": [
+      "uptime",
+      "uptime -p"
+    ]
+  },
+  "date": {
+    "description": "Display or set the system date and time",
+    "usage": "date [OPTIONS] [+FORMAT]",
+    "tags": ["time", "date", "calendar", "clock"],
+    "examples": [
+      "date",
+      "date '+%Y-%m-%d'",
+      "date -u"
+    ]
+  },
+  "cal": {
+    "description": "Display a calendar",
+    "usage": "cal [OPTIONS] [[MONTH] YEAR]",
+    "tags": ["calendar", "date", "month"],
+    "examples": [
+      "cal",
+      "cal 2024",
+      "cal 12 2024"
+    ]
+  },
+  "history": {
+    "description": "Display command history",
+    "usage": "history [OPTIONS]",
+    "tags": ["command", "history", "previous", "log"],
+    "examples": [
+      "history",
+      "history 20",
+      "history | grep ssh"
+    ]
+  },
+  "echo": {
+    "description": "Display a line of text",
+    "usage": "echo [OPTIONS] [STRING]...",
+    "tags": ["print", "display", "text", "output"],
+    "examples": [
+      "echo 'Hello World'",
+      "echo $PATH",
+      "echo -e 'Line1\\nLine2'"
+    ]
+  },
+  "env": {
+    "description": "Display or set environment variables",
+    "usage": "env [OPTIONS] [NAME=VALUE]... [COMMAND [ARG]...]",
+    "tags": ["environment", "variables", "settings"],
+    "examples": [
+      "env",
+      "env | grep PATH",
+      "env VAR=value command"
+    ]
+  },
+  "export": {
+    "description": "Set environment variables",
+    "usage": "export [NAME[=VALUE]]...",
+    "tags": ["environment", "variable", "set"],
+    "examples": [
+      "export PATH=$PATH:/new/path",
+      "export EDITOR=vim",
+      "export -p"
+    ]
+  },
+  "alias": {
+    "description": "Create an alias for a command",
+    "usage": "alias [NAME[=VALUE]]...",
+    "tags": ["shortcut", "command", "alias"],
+    "examples": [
+      "alias ll='ls -la'",
+      "alias",
+      "alias grep='grep --color=auto'"
+    ]
+  },
+  "ln": {
+    "description": "Make links between files",
+    "usage": "ln [OPTIONS] TARGET LINK_NAME",
+    "tags": ["link", "symbolic", "shortcut"],
+    "examples": [
+      "ln -s /path/to/file linkname",
+      "ln file hardlink",
+      "ln -s /path/to/directory/ linkdir"
+    ]
+  },
+  "mount": {
+    "description": "Mount a filesystem",
+    "usage": "mount [OPTIONS] DEVICE DIRECTORY",
+    "tags": ["filesystem", "mount", "disk", "partition"],
+    "examples": [
+      "mount",
+      "mount /dev/sdb1 /mnt/usb",
+      "mount -t nfs server:/share /mnt/nfs"
+    ]
+  },
+  "umount": {
+    "description": "Unmount a filesystem",
+    "usage": "umount [OPTIONS] DIRECTORY",
+    "tags": ["filesystem", "unmount", "disk", "eject"],
+    "examples": [
+      "umount /mnt/usb",
+      "umount -a",
+      "umount -l /mnt/disk"
+    ]
+  },
+  "systemctl": {
+    "description": "Control the systemd system and service manager",
+    "usage": "systemctl [OPTIONS] COMMAND [NAME...]",
+    "tags": ["service", "daemon", "systemd", "start", "stop"],
+    "examples": [
+      "systemctl status nginx",
+      "systemctl start apache2",
+      "systemctl enable ssh"
+    ]
+  },
+  "service": {
+    "description": "Run a System V init script",
+    "usage": "service SERVICE COMMAND",
+    "tags": ["service", "daemon", "start", "stop", "restart"],
+    "examples": [
+      "service nginx status",
+      "service apache2 restart",
+      "service ssh stop"
+    ]
+  },
+  "journalctl": {
+    "description": "Query the systemd journal",
+    "usage": "journalctl [OPTIONS]",
+    "tags": ["log", "journal", "systemd", "messages"],
+    "examples": [
+      "journalctl -xe",
+      "journalctl -u nginx",
+      "journalctl --since today"
+    ]
+  },
+  "dmesg": {
+    "description": "Print or control the kernel ring buffer",
+    "usage": "dmesg [OPTIONS]",
+    "tags": ["kernel", "messages", "boot", "hardware"],
+    "examples": [
+      "dmesg",
+      "dmesg | tail",
+      "dmesg -T"
+    ]
+  },
+  "lsof": {
+    "description": "List open files",
+    "usage": "lsof [OPTIONS]",
+    "tags": ["files", "open", "process", "port"],
+    "examples": [
+      "lsof",
+      "lsof -i :80",
+      "lsof -u username"
+    ]
+  },
+  "sudo": {
+    "description": "Execute a command as another user (typically root)",
+    "usage": "sudo [OPTIONS] COMMAND",
+    "tags": ["privilege", "root", "admin", "permission"],
+    "examples": [
+      "sudo apt update",
+      "sudo systemctl restart nginx",
+      "sudo -i"
+    ]
+  },
+  "apt": {
+    "description": "Package manager for Debian/Ubuntu systems",
+    "usage": "apt [OPTIONS] COMMAND",
+    "tags": ["package", "install", "update", "software"],
+    "examples": [
+      "apt update",
+      "apt install nginx",
+      "apt search python"
+    ]
+  },
+  "yum": {
+    "description": "Package manager for RedHat/CentOS systems",
+    "usage": "yum [OPTIONS] COMMAND",
+    "tags": ["package", "install", "update", "software"],
+    "examples": [
+      "yum update",
+      "yum install httpd",
+      "yum search python"
+    ]
+  }
+}

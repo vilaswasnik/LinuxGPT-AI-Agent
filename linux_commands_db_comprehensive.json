@@ -1,0 +1,1572 @@
+{
+  "_meta": {
+    "description": "Comprehensive Linux Commands Database with Educational Content",
+    "version": "2.0",
+    "categories": ["file_operations", "text_processing", "system_info", "process_management", "network", "compression", "permissions", "user_management", "disk_management", "package_management"]
+  },
+  
+  "command_combinations": {
+    "find_and_delete": {
+      "description": "Find and delete files matching a pattern",
+      "command": "find . -name '*.tmp' -type f -delete",
+      "explanation": "Searches current directory for .tmp files and deletes them. -type f ensures only files, not directories",
+      "safer_alternative": "find . -name '*.tmp' -type f -exec rm -i {} \\;",
+      "tags": ["find", "delete", "cleanup", "combination"]
+    },
+    "grep_count_occurrences": {
+      "description": "Count occurrences of a pattern in files",
+      "command": "grep -r 'pattern' . | wc -l",
+      "explanation": "grep searches recursively, wc -l counts the lines (occurrences)",
+      "tags": ["grep", "wc", "count", "combination"]
+    },
+    "list_by_size": {
+      "description": "List files sorted by size",
+      "command": "ls -lhS",
+      "explanation": "-l (long format), -h (human readable sizes), -S (sort by size, largest first)",
+      "tags": ["ls", "sort", "size"]
+    },
+    "list_by_date": {
+      "description": "List files sorted by modification time",
+      "command": "ls -lht",
+      "explanation": "-t sorts by time (newest first), combine with -r for oldest first",
+      "tags": ["ls", "sort", "date", "time"]
+    },
+    "disk_usage_sorted": {
+      "description": "Show disk usage sorted by size",
+      "command": "du -sh * | sort -rh",
+      "explanation": "du shows disk usage, sort -rh sorts reverse (-r) human-readable (-h) numbers",
+      "tags": ["du", "sort", "disk", "combination"]
+    },
+    "find_large_files": {
+      "description": "Find files larger than 100MB",
+      "command": "find . -type f -size +100M -exec ls -lh {} \\; | awk '{print $9, $5}'",
+      "explanation": "Finds large files and displays name with size in human-readable format",
+      "tags": ["find", "size", "large files", "combination"]
+    },
+    "count_files_by_extension": {
+      "description": "Count files grouped by extension",
+      "command": "find . -type f | sed 's/.*\\.//' | sort | uniq -c | sort -rn",
+      "explanation": "Extracts extensions, sorts, counts unique ones, and sorts by frequency",
+      "tags": ["find", "sed", "uniq", "count", "combination"]
+    },
+    "monitor_log_file": {
+      "description": "Monitor log file in real-time",
+      "command": "tail -f /var/log/syslog",
+      "explanation": "-f follows the file, showing new lines as they're added. Press Ctrl+C to stop",
+      "tags": ["tail", "log", "monitor", "realtime"]
+    },
+    "search_and_replace_files": {
+      "description": "Search and replace text in multiple files",
+      "command": "find . -type f -name '*.txt' -exec sed -i 's/old/new/g' {} +",
+      "explanation": "Finds .txt files and replaces old with new in-place. Remove -i to preview first",
+      "safer_alternative": "find . -type f -name '*.txt' -exec sed 's/old/new/g' {} +",
+      "tags": ["find", "sed", "replace", "combination"]
+    },
+    "top_processes_by_memory": {
+      "description": "Show top 10 processes using most memory",
+      "command": "ps aux --sort=-%mem | head -11",
+      "explanation": "Lists processes sorted by memory usage, head shows top 10 (11 includes header)",
+      "tags": ["ps", "memory", "sort", "combination"]
+    },
+    "top_processes_by_cpu": {
+      "description": "Show top 10 processes using most CPU",
+      "command": "ps aux --sort=-%cpu | head -11",
+      "explanation": "Lists processes sorted by CPU usage (descending)",
+      "tags": ["ps", "cpu", "sort", "combination"]
+    },
+    "find_listening_ports": {
+      "description": "Find all listening network ports",
+      "command": "netstat -tuln | grep LISTEN",
+      "explanation": "-t (TCP), -u (UDP), -l (listening), -n (numeric), grep filters listening ports",
+      "alternative": "ss -tuln | grep LISTEN",
+      "tags": ["netstat", "ss", "port", "network", "combination"]
+    },
+    "check_port_usage": {
+      "description": "Check what's using a specific port",
+      "command": "lsof -i :8080",
+      "explanation": "Shows process using port 8080. May need sudo for all processes",
+      "tags": ["lsof", "port", "network"]
+    },
+    "archive_directory": {
+      "description": "Create compressed archive of directory",
+      "command": "tar -czf archive.tar.gz /path/to/directory",
+      "explanation": "-c (create), -z (gzip), -f (file). Use -j for bzip2, -J for xz compression",
+      "tags": ["tar", "compress", "archive", "backup"]
+    },
+    "extract_archive": {
+      "description": "Extract compressed archive",
+      "command": "tar -xzf archive.tar.gz",
+      "explanation": "-x (extract), -z (gzip), -f (file). tar auto-detects compression type",
+      "tags": ["tar", "extract", "decompress"]
+    },
+    "find_recently_modified": {
+      "description": "Find files modified in last 24 hours",
+      "command": "find . -type f -mtime -1",
+      "explanation": "-mtime -1 means less than 1 day ago. Use -mmin -60 for last 60 minutes",
+      "tags": ["find", "modified", "recent", "time"]
+    },
+    "disk_space_by_directory": {
+      "description": "Show disk usage for each directory",
+      "command": "du -h --max-depth=1 | sort -rh",
+      "explanation": "Shows size of immediate subdirectories, sorted largest first",
+      "tags": ["du", "disk", "directory", "sort", "combination"]
+    },
+    "count_lines_in_files": {
+      "description": "Count total lines across all files",
+      "command": "find . -type f -name '*.py' -exec wc -l {} + | tail -1",
+      "explanation": "Counts lines in all Python files, tail shows total",
+      "tags": ["find", "wc", "count", "lines", "combination"]
+    },
+    "kill_processes_by_name": {
+      "description": "Kill all processes matching a name",
+      "command": "pkill -f 'process_name'",
+      "explanation": "-f matches full command line. Use killall for exact name match",
+      "safer_alternative": "pgrep -f 'process_name' (to see what would be killed first)",
+      "tags": ["pkill", "kill", "process"]
+    },
+    "watch_command_output": {
+      "description": "Run command repeatedly and watch output",
+      "command": "watch -n 2 'df -h'",
+      "explanation": "Runs df -h every 2 seconds. Press Ctrl+C to stop",
+      "tags": ["watch", "monitor", "repeat"]
+    },
+    "find_duplicate_files": {
+      "description": "Find duplicate files by content",
+      "command": "find . -type f -exec md5sum {} + | sort | uniq -w32 -D",
+      "explanation": "Calculates MD5 hash of each file, finds duplicates by hash",
+      "tags": ["find", "md5sum", "duplicate", "combination"]
+    },
+    "recursive_grep_with_context": {
+      "description": "Search with surrounding context lines",
+      "command": "grep -rn -A 3 -B 3 'pattern' .",
+      "explanation": "-r (recursive), -n (line numbers), -A (lines after), -B (lines before)",
+      "tags": ["grep", "search", "context"]
+    },
+    "find_empty_files": {
+      "description": "Find empty files and directories",
+      "command": "find . -empty",
+      "explanation": "Finds both empty files (0 bytes) and empty directories",
+      "tags": ["find", "empty"]
+    },
+    "parallel_compression": {
+      "description": "Compress using multiple CPU cores",
+      "command": "tar -I pigz -cf archive.tar.gz directory/",
+      "explanation": "Uses pigz (parallel gzip) for faster compression on multi-core systems",
+      "alternative": "tar -I 'xz -T0' -cf archive.tar.xz directory/ (for xz compression)",
+      "tags": ["tar", "compression", "parallel", "performance"]
+    },
+    "batch_rename_files": {
+      "description": "Rename multiple files using pattern",
+      "command": "for f in *.txt; do mv \"$f\" \"${f%.txt}.md\"; done",
+      "explanation": "Changes all .txt files to .md. ${f%.txt} removes .txt extension",
+      "tags": ["rename", "batch", "loop"]
+    },
+    "find_and_grep": {
+      "description": "Find files and search content",
+      "command": "find . -name '*.log' -exec grep -l 'ERROR' {} +",
+      "explanation": "Finds .log files containing 'ERROR'. -l shows only filenames",
+      "tags": ["find", "grep", "combination", "search"]
+    },
+    "monitor_directory_changes": {
+      "description": "Watch for file changes in directory",
+      "command": "watch -d ls -l",
+      "explanation": "-d highlights differences between updates",
+      "tags": ["watch", "monitor", "files"]
+    },
+    "network_bandwidth_test": {
+      "description": "Test network bandwidth between hosts",
+      "command": "iperf3 -c server_ip",
+      "explanation": "Measures TCP/UDP bandwidth. Run 'iperf3 -s' on server first",
+      "tags": ["iperf", "network", "bandwidth", "performance"]
+    },
+    "csv_column_extraction": {
+      "description": "Extract specific columns from CSV",
+      "command": "cut -d',' -f1,3 file.csv",
+      "explanation": "Extracts columns 1 and 3. -d sets delimiter, -f selects fields",
+      "tags": ["cut", "csv", "column", "text processing"]
+    },
+    "json_pretty_print": {
+      "description": "Pretty print JSON file",
+      "command": "cat file.json | python -m json.tool",
+      "explanation": "Formats JSON with proper indentation for readability",
+      "alternative": "jq '.' file.json (if jq is installed)",
+      "tags": ["json", "format", "pretty print"]
+    }
+  },
+  
+  "ls": {
+    "description": "List directory contents - one of the most fundamental commands",
+    "usage": "ls [OPTIONS] [FILE]...",
+    "category": "file_operations",
+    "tags": ["files", "directory", "list", "show", "basic"],
+    "common_options": {
+      "-l": "Long format with permissions, owner, size, date",
+      "-a": "Show all files including hidden (starting with .)",
+      "-h": "Human-readable sizes (KB, MB, GB)",
+      "-t": "Sort by modification time, newest first",
+      "-r": "Reverse sort order",
+      "-S": "Sort by file size, largest first",
+      "-R": "Recursive - list subdirectories too",
+      "-i": "Show inode numbers",
+      "-d": "List directories themselves, not contents"
+    },
+    "examples": [
+      {
+        "command": "ls -la",
+        "explanation": "Long format showing all files including hidden"
+      },
+      {
+        "command": "ls -lhS",
+        "explanation": "Long format, human-readable sizes, sorted by size"
+      },
+      {
+        "command": "ls -lt | head -10",
+        "explanation": "Show 10 most recently modified files"
+      },
+      {
+        "command": "ls -lR",
+        "explanation": "Recursive listing of all subdirectories"
+      }
+    ],
+    "tips": [
+      "Combine multiple options: ls -lAhtr shows all files, long format, human sizes, sorted by time (oldest first)",
+      "Use ls -d */ to list only directories",
+      "ls -1 shows one file per line (useful for scripting)"
+    ]
+  },
+  
+  "cd": {
+    "description": "Change directory - navigate filesystem",
+    "usage": "cd [DIRECTORY]",
+    "category": "file_operations",
+    "tags": ["directory", "navigate", "change", "basic"],
+    "special_paths": {
+      "~": "Home directory",
+      "-": "Previous directory",
+      "..": "Parent directory",
+      "../..": "Two levels up",
+      ".": "Current directory (rarely needed)",
+      "/": "Root directory"
+    },
+    "examples": [
+      {
+        "command": "cd /var/log",
+        "explanation": "Change to absolute path"
+      },
+      {
+        "command": "cd ~/Documents",
+        "explanation": "Go to Documents in home directory"
+      },
+      {
+        "command": "cd -",
+        "explanation": "Switch to previous directory (toggle)"
+      },
+      {
+        "command": "cd ../..",
+        "explanation": "Go up two directory levels"
+      }
+    ],
+    "tips": [
+      "Use 'pushd' and 'popd' for directory stack navigation",
+      "'cd' with no arguments goes to home directory",
+      "Use Tab completion to avoid typing full paths"
+    ]
+  },
+  
+  "pwd": {
+    "description": "Print working directory - show current location",
+    "usage": "pwd [OPTIONS]",
+    "category": "file_operations",
+    "tags": ["directory", "current", "path", "location", "basic"],
+    "common_options": {
+      "-L": "Print logical path (with symlinks)",
+      "-P": "Print physical path (resolve symlinks)"
+    },
+    "examples": [
+      {
+        "command": "pwd",
+        "explanation": "Show current directory path"
+      },
+      {
+        "command": "pwd -P",
+        "explanation": "Show real path (resolve symbolic links)"
+      }
+    ],
+    "tips": [
+      "Useful in scripts to save current location: OLDPWD=$(pwd)",
+      "Combine with command substitution: cd $(dirname $(pwd))"
+    ]
+  },
+  
+  "cat": {
+    "description": "Concatenate and display file contents",
+    "usage": "cat [OPTIONS] [FILE]...",
+    "category": "file_operations",
+    "tags": ["file", "read", "display", "show", "content", "basic"],
+    "common_options": {
+      "-n": "Number all output lines",
+      "-b": "Number non-empty lines only",
+      "-s": "Squeeze multiple blank lines into one",
+      "-A": "Show all characters including non-printing",
+      "-E": "Display $ at end of each line",
+      "-T": "Display TAB characters as ^I"
+    },
+    "examples": [
+      {
+        "command": "cat file.txt",
+        "explanation": "Display file contents"
+      },
+      {
+        "command": "cat file1.txt file2.txt > combined.txt",
+        "explanation": "Concatenate multiple files into one"
+      },
+      {
+        "command": "cat -n script.py",
+        "explanation": "Show file with line numbers"
+      },
+      {
+        "command": "cat > newfile.txt",
+        "explanation": "Create new file (type content, Ctrl+D to save)"
+      }
+    ],
+    "tips": [
+      "For large files, use 'less' or 'more' instead",
+      "Use 'tac' to display file in reverse order",
+      "cat without arguments reads from stdin (useful in pipes)"
+    ]
+  },
+  
+  "grep": {
+    "description": "Search text using patterns - powerful text search tool",
+    "usage": "grep [OPTIONS] PATTERN [FILE]...",
+    "category": "text_processing",
+    "tags": ["search", "find", "text", "pattern", "filter"],
+    "common_options": {
+      "-r": "Recursive search in directories",
+      "-i": "Case-insensitive search",
+      "-n": "Show line numbers",
+      "-v": "Invert match (show non-matching lines)",
+      "-l": "Show only filenames with matches",
+      "-c": "Count matching lines",
+      "-A NUM": "Show NUM lines after match",
+      "-B NUM": "Show NUM lines before match",
+      "-C NUM": "Show NUM lines before and after",
+      "-w": "Match whole words only",
+      "-E": "Extended regex (same as egrep)",
+      "-o": "Show only matched part of line",
+      "--color": "Highlight matches in color"
+    },
+    "examples": [
+      {
+        "command": "grep 'error' logfile.txt",
+        "explanation": "Find lines containing 'error'"
+      },
+      {
+        "command": "grep -rn 'TODO' .",
+        "explanation": "Recursively search for 'TODO' with line numbers"
+      },
+      {
+        "command": "grep -i 'warning' *.log",
+        "explanation": "Case-insensitive search in all .log files"
+      },
+      {
+        "command": "grep -v '^#' config.txt",
+        "explanation": "Show lines not starting with # (exclude comments)"
+      },
+      {
+        "command": "grep -E 'error|warning|critical' app.log",
+        "explanation": "Search for multiple patterns (OR logic)"
+      }
+    ],
+    "tips": [
+      "Use grep -P for Perl-compatible regex",
+      "Combine with other commands: ps aux | grep nginx",
+      "Use grep -c to count occurrences instead of piping to wc -l"
+    ]
+  },
+  
+  "find": {
+    "description": "Search for files and directories in hierarchy",
+    "usage": "find [PATH] [OPTIONS] [EXPRESSION]",
+    "category": "file_operations",
+    "tags": ["search", "file", "locate", "recursive"],
+    "common_options": {
+      "-name": "Search by filename (case-sensitive)",
+      "-iname": "Search by filename (case-insensitive)",
+      "-type f": "Find files only",
+      "-type d": "Find directories only",
+      "-size +10M": "Files larger than 10MB",
+      "-size -10k": "Files smaller than 10KB",
+      "-mtime -7": "Modified in last 7 days",
+      "-mtime +30": "Modified more than 30 days ago",
+      "-user username": "Files owned by user",
+      "-perm 755": "Files with specific permissions",
+      "-exec": "Execute command on found files",
+      "-delete": "Delete found files (use carefully!)",
+      "-empty": "Find empty files/directories"
+    },
+    "examples": [
+      {
+        "command": "find . -name '*.txt'",
+        "explanation": "Find all .txt files in current directory and subdirectories"
+      },
+      {
+        "command": "find /home -type f -mtime -7",
+        "explanation": "Find files modified in last 7 days"
+      },
+      {
+        "command": "find . -size +100M -exec ls -lh {} \\;",
+        "explanation": "Find large files and show their sizes"
+      },
+      {
+        "command": "find . -name '*.log' -delete",
+        "explanation": "Find and delete all .log files (careful!)"
+      },
+      {
+        "command": "find . -type f -name '*.py' | wc -l",
+        "explanation": "Count number of Python files"
+      }
+    ],
+    "tips": [
+      "Use -maxdepth N to limit search depth",
+      "Combine multiple conditions: find . -name '*.txt' -size +1M",
+      "Use -print0 with xargs -0 for filenames with spaces"
+    ]
+  },
+  
+  "awk": {
+    "description": "Pattern scanning and text processing language",
+    "usage": "awk 'pattern {action}' [FILE]",
+    "category": "text_processing",
+    "tags": ["text", "processing", "column", "format", "advanced"],
+    "examples": [
+      {
+        "command": "awk '{print $1, $3}' file.txt",
+        "explanation": "Print 1st and 3rd column from each line"
+      },
+      {
+        "command": "awk -F',' '{print $2}' data.csv",
+        "explanation": "Print 2nd column from comma-separated file"
+      },
+      {
+        "command": "awk '/error/ {print $0}' log.txt",
+        "explanation": "Print lines containing 'error'"
+      },
+      {
+        "command": "awk '{sum+=$1} END {print sum}' numbers.txt",
+        "explanation": "Sum values in first column"
+      },
+      {
+        "command": "ps aux | awk '{print $2, $11}'",
+        "explanation": "Show PID and command name from ps output"
+      }
+    ],
+    "tips": [
+      "$0 is the entire line, $1 is first field, $2 second field, etc.",
+      "Use BEGIN and END blocks for initialization and summary",
+      "Built-in variables: NR (line number), NF (number of fields)"
+    ]
+  },
+  
+  "sed": {
+    "description": "Stream editor for filtering and transforming text",
+    "usage": "sed [OPTIONS] 'command' [FILE]",
+    "category": "text_processing",
+    "tags": ["text", "edit", "replace", "stream", "advanced"],
+    "common_options": {
+      "-i": "Edit files in-place (modify original)",
+      "-e": "Multiple editing commands",
+      "-n": "Suppress automatic output",
+      "-r": "Use extended regex"
+    },
+    "examples": [
+      {
+        "command": "sed 's/old/new/g' file.txt",
+        "explanation": "Replace all occurrences of 'old' with 'new'"
+      },
+      {
+        "command": "sed -i 's/foo/bar/g' file.txt",
+        "explanation": "Replace in-place (modify file directly)"
+      },
+      {
+        "command": "sed -n '10,20p' file.txt",
+        "explanation": "Print lines 10 to 20"
+      },
+      {
+        "command": "sed '/pattern/d' file.txt",
+        "explanation": "Delete lines matching pattern"
+      },
+      {
+        "command": "sed 's/^/PREFIX: /' file.txt",
+        "explanation": "Add prefix to each line"
+      }
+    ],
+    "tips": [
+      "Test without -i first to preview changes",
+      "Use sed -i.bak to create backup before modifying",
+      "Combine multiple commands: sed -e 's/a/b/' -e 's/c/d/'"
+    ]
+  },
+  
+  "ps": {
+    "description": "Report process status - show running processes",
+    "usage": "ps [OPTIONS]",
+    "category": "process_management",
+    "tags": ["process", "running", "tasks", "list", "system"],
+    "common_options": {
+      "aux": "All processes, user-oriented format",
+      "ef": "All processes, full format",
+      "-u username": "Processes for specific user",
+      "--sort=-%mem": "Sort by memory usage",
+      "--sort=-%cpu": "Sort by CPU usage"
+    },
+    "examples": [
+      {
+        "command": "ps aux",
+        "explanation": "Show all running processes with detailed info"
+      },
+      {
+        "command": "ps aux | grep nginx",
+        "explanation": "Find nginx processes"
+      },
+      {
+        "command": "ps aux --sort=-%mem | head -10",
+        "explanation": "Top 10 memory-consuming processes"
+      },
+      {
+        "command": "ps -ef | grep python",
+        "explanation": "Find all Python processes"
+      }
+    ],
+    "tips": [
+      "Use 'top' or 'htop' for real-time monitoring",
+      "ps aux shows: USER, PID, %CPU, %MEM, COMMAND",
+      "Combine with pgrep for specific searches"
+    ]
+  },
+  
+  "top": {
+    "description": "Display and update sorted information about processes",
+    "usage": "top [OPTIONS]",
+    "category": "process_management",
+    "tags": ["process", "monitor", "cpu", "memory", "performance", "realtime"],
+    "interactive_keys": {
+      "q": "Quit",
+      "k": "Kill a process",
+      "M": "Sort by memory usage",
+      "P": "Sort by CPU usage",
+      "T": "Sort by running time",
+      "u": "Filter by user",
+      "1": "Show individual CPU cores",
+      "h": "Help"
+    },
+    "examples": [
+      {
+        "command": "top",
+        "explanation": "Interactive process monitor"
+      },
+      {
+        "command": "top -u username",
+        "explanation": "Show processes for specific user"
+      },
+      {
+        "command": "top -bn1 | head -20",
+        "explanation": "Non-interactive snapshot of top processes"
+      }
+    ],
+    "tips": [
+      "Press 'M' to sort by memory, 'P' for CPU",
+      "Use 'htop' for a more user-friendly interface",
+      "top shows load average in first line: 1min, 5min, 15min"
+    ]
+  },
+  
+  "df": {
+    "description": "Report file system disk space usage",
+    "usage": "df [OPTIONS] [FILE]...",
+    "category": "disk_management",
+    "tags": ["disk", "space", "usage", "storage", "filesystem"],
+    "common_options": {
+      "-h": "Human-readable sizes (GB, MB)",
+      "-i": "Show inode information",
+      "-T": "Show filesystem type",
+      "-a": "Include pseudo filesystems",
+      "--total": "Show grand total"
+    },
+    "examples": [
+      {
+        "command": "df -h",
+        "explanation": "Show disk space in human-readable format"
+      },
+      {
+        "command": "df -hT",
+        "explanation": "Include filesystem types"
+      },
+      {
+        "command": "df -i",
+        "explanation": "Show inode usage (file count limits)"
+      },
+      {
+        "command": "df -h /home",
+        "explanation": "Check space for specific mount point"
+      }
+    ],
+    "tips": [
+      "Use 'du' to see disk usage by directory",
+      "If df shows 100% but files deleted, check for open file handles with lsof",
+      "Watch out for inode exhaustion (df -i)"
+    ]
+  },
+  
+  "du": {
+    "description": "Estimate file space usage - disk usage by directory",
+    "usage": "du [OPTIONS] [FILE]...",
+    "category": "disk_management",
+    "tags": ["disk", "usage", "size", "directory", "space"],
+    "common_options": {
+      "-h": "Human-readable sizes",
+      "-s": "Summary only (total for each argument)",
+      "-c": "Grand total",
+      "--max-depth=N": "Limit directory depth",
+      "-a": "Include files, not just directories",
+      "--exclude": "Exclude pattern"
+    },
+    "examples": [
+      {
+        "command": "du -sh *",
+        "explanation": "Show size of each item in current directory"
+      },
+      {
+        "command": "du -h --max-depth=1 | sort -rh",
+        "explanation": "Show directory sizes sorted by size"
+      },
+      {
+        "command": "du -sh /var/log",
+        "explanation": "Total size of /var/log directory"
+      },
+      {
+        "command": "du -ah | sort -rh | head -20",
+        "explanation": "Find 20 largest files/directories"
+      }
+    ],
+    "tips": [
+      "du counts actual disk usage (considers hard links)",
+      "For fast estimates, use --apparent-size",
+      "Use ncdu for interactive disk usage explorer"
+    ]
+  },
+  
+  "free": {
+    "description": "Display amount of free and used memory in the system",
+    "usage": "free [OPTIONS]",
+    "category": "system_info",
+    "tags": ["memory", "ram", "usage", "available", "system"],
+    "common_options": {
+      "-h": "Human-readable output",
+      "-m": "Show in megabytes",
+      "-g": "Show in gigabytes",
+      "-s N": "Update every N seconds",
+      "-t": "Show total line"
+    },
+    "examples": [
+      {
+        "command": "free -h",
+        "explanation": "Show memory usage in human-readable format"
+      },
+      {
+        "command": "free -m -s 2",
+        "explanation": "Show memory in MB, update every 2 seconds"
+      },
+      {
+        "command": "free -ht",
+        "explanation": "Human-readable with total line"
+      }
+    ],
+    "tips": [
+      "'available' column shows memory available for new apps",
+      "Buffers/cache is memory used for system caching (reclaimable)",
+      "Don't worry if 'free' is low - Linux uses free RAM for caching"
+    ]
+  },
+  
+  "tar": {
+    "description": "Archive utility - create and extract tar archives",
+    "usage": "tar [OPTIONS] [FILE]...",
+    "category": "compression",
+    "tags": ["archive", "compress", "extract", "backup"],
+    "common_options": {
+      "-c": "Create archive",
+      "-x": "Extract archive",
+      "-t": "List contents",
+      "-f": "Specify filename",
+      "-z": "gzip compression",
+      "-j": "bzip2 compression",
+      "-J": "xz compression",
+      "-v": "Verbose output",
+      "-C": "Extract to specific directory"
+    },
+    "examples": [
+      {
+        "command": "tar -czf backup.tar.gz /data",
+        "explanation": "Create gzip-compressed archive of /data"
+      },
+      {
+        "command": "tar -xzf backup.tar.gz",
+        "explanation": "Extract gzip-compressed archive"
+      },
+      {
+        "command": "tar -tzf backup.tar.gz",
+        "explanation": "List contents without extracting"
+      },
+      {
+        "command": "tar -xzf file.tar.gz -C /destination",
+        "explanation": "Extract to specific directory"
+      },
+      {
+        "command": "tar -cjf archive.tar.bz2 dir/",
+        "explanation": "Create bzip2-compressed archive (better compression)"
+      }
+    ],
+    "tips": [
+      "Remember: tar -czf creates, tar -xzf extracts",
+      "Modern tar auto-detects compression: tar -xf works for any format",
+      "Use -v to see progress during operations"
+    ]
+  },
+  
+  "wget": {
+    "description": "Download files from the web - non-interactive downloader",
+    "usage": "wget [OPTIONS] [URL]",
+    "category": "network",
+    "tags": ["download", "web", "http", "fetch", "transfer"],
+    "common_options": {
+      "-O": "Output to specific file",
+      "-c": "Continue partial download",
+      "-r": "Recursive download",
+      "-np": "No parent directories (with -r)",
+      "-q": "Quiet mode",
+      "-P": "Prefix directory for downloads",
+      "--limit-rate": "Limit download speed"
+    },
+    "examples": [
+      {
+        "command": "wget https://example.com/file.zip",
+        "explanation": "Download file"
+      },
+      {
+        "command": "wget -c https://example.com/large-file.iso",
+        "explanation": "Resume interrupted download"
+      },
+      {
+        "command": "wget -O custom-name.zip https://example.com/file.zip",
+        "explanation": "Save with custom filename"
+      },
+      {
+        "command": "wget -r -np https://example.com/docs/",
+        "explanation": "Recursively download website section"
+      }
+    ],
+    "tips": [
+      "Use -c to resume downloads if connection drops",
+      "wget keeps retrying if network is unstable",
+      "For single file downloads, curl is more flexible"
+    ]
+  },
+  
+  "curl": {
+    "description": "Transfer data from or to a server - versatile data transfer tool",
+    "usage": "curl [OPTIONS] [URL]",
+    "category": "network",
+    "tags": ["http", "download", "api", "web", "request", "transfer"],
+    "common_options": {
+      "-O": "Save with remote filename",
+      "-o": "Save to specific file",
+      "-I": "Fetch headers only",
+      "-L": "Follow redirects",
+      "-X": "Specify request method (GET, POST, etc.)",
+      "-d": "Send data (for POST)",
+      "-H": "Add custom header",
+      "-u": "User authentication",
+      "-v": "Verbose output",
+      "-s": "Silent mode"
+    },
+    "examples": [
+      {
+        "command": "curl https://api.example.com/data",
+        "explanation": "Fetch URL content"
+      },
+      {
+        "command": "curl -I https://example.com",
+        "explanation": "Get HTTP headers only"
+      },
+      {
+        "command": "curl -X POST -d 'key=value' https://api.example.com",
+        "explanation": "Send POST request with data"
+      },
+      {
+        "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+        "explanation": "Add custom header (API authentication)"
+      },
+      {
+        "command": "curl -o file.html https://example.com",
+        "explanation": "Download and save to file"
+      }
+    ],
+    "tips": [
+      "Use -L to follow redirects (important for many sites)",
+      "curl is better for APIs, wget for downloading files",
+      "Add | jq for pretty JSON formatting"
+    ]
+  },
+  
+  "chmod": {
+    "description": "Change file permissions - control who can read/write/execute",
+    "usage": "chmod [OPTIONS] MODE FILE...",
+    "category": "permissions",
+    "tags": ["permissions", "access", "rights", "security"],
+    "permission_numbers": {
+      "7": "rwx (read, write, execute)",
+      "6": "rw- (read, write)",
+      "5": "r-x (read, execute)",
+      "4": "r-- (read only)",
+      "3": "-wx (write, execute)",
+      "2": "-w- (write only)",
+      "1": "--x (execute only)",
+      "0": "--- (no permissions)"
+    },
+    "symbolic_modes": {
+      "u": "User/owner",
+      "g": "Group",
+      "o": "Others",
+      "a": "All (ugo)",
+      "+": "Add permission",
+      "-": "Remove permission",
+      "=": "Set exact permission"
+    },
+    "examples": [
+      {
+        "command": "chmod 755 script.sh",
+        "explanation": "Owner: rwx, Group: r-x, Others: r-x"
+      },
+      {
+        "command": "chmod +x file.sh",
+        "explanation": "Add execute permission for all"
+      },
+      {
+        "command": "chmod u+x,g-w file",
+        "explanation": "Add execute for owner, remove write for group"
+      },
+      {
+        "command": "chmod -R 644 directory/",
+        "explanation": "Recursively set permissions (files: rw-r--r--)"
+      }
+    ],
+    "tips": [
+      "755 for scripts/executables, 644 for regular files",
+      "Never use 777 unless absolutely necessary (security risk)",
+      "Use chmod -R carefully on directories"
+    ]
+  },
+  
+  "chown": {
+    "description": "Change file owner and group",
+    "usage": "chown [OPTIONS] OWNER[:GROUP] FILE...",
+    "category": "permissions",
+    "tags": ["ownership", "user", "group", "permissions"],
+    "common_options": {
+      "-R": "Recursive (for directories)",
+      "-v": "Verbose output",
+      "--reference": "Use ownership of reference file"
+    },
+    "examples": [
+      {
+        "command": "chown user file.txt",
+        "explanation": "Change owner to 'user'"
+      },
+      {
+        "command": "chown user:group file.txt",
+        "explanation": "Change owner and group"
+      },
+      {
+        "command": "chown -R user:group directory/",
+        "explanation": "Recursively change ownership"
+      },
+      {
+        "command": "chown :group file.txt",
+        "explanation": "Change group only (keep owner)"
+      }
+    ],
+    "tips": [
+      "Usually requires sudo/root privileges",
+      "Use chgrp to change group only",
+      "Check current ownership with ls -l"
+    ]
+  },
+  
+  "ln": {
+    "description": "Make links between files - create shortcuts",
+    "usage": "ln [OPTIONS] TARGET LINK_NAME",
+    "category": "file_operations",
+    "tags": ["link", "symbolic", "shortcut", "symlink"],
+    "link_types": {
+      "hard": "Direct reference to file data (same inode)",
+      "symbolic": "Pointer to filename (can cross filesystems)"
+    },
+    "common_options": {
+      "-s": "Create symbolic link (recommended)",
+      "-f": "Force (remove existing destination)",
+      "-n": "Treat symlink to directory as file",
+      "-v": "Verbose output"
+    },
+    "examples": [
+      {
+        "command": "ln -s /path/to/file linkname",
+        "explanation": "Create symbolic link"
+      },
+      {
+        "command": "ln -s /opt/app/current /usr/local/bin/app",
+        "explanation": "Create symlink for easy access"
+      },
+      {
+        "command": "ln file hardlink",
+        "explanation": "Create hard link (no -s)"
+      }
+    ],
+    "tips": [
+      "Always use absolute paths with symlinks",
+      "Symbolic links can point to non-existent files (check with ls -l)",
+      "Hard links can't cross filesystems or link to directories"
+    ]
+  },
+  
+  "netstat": {
+    "description": "Network statistics - show network connections, routing tables",
+    "usage": "netstat [OPTIONS]",
+    "category": "network",
+    "tags": ["network", "connections", "ports", "sockets", "statistics"],
+    "common_options": {
+      "-t": "TCP connections",
+      "-u": "UDP connections",
+      "-l": "Listening sockets only",
+      "-n": "Numeric addresses (don't resolve names)",
+      "-p": "Show program/PID",
+      "-a": "All sockets",
+      "-r": "Routing table",
+      "-s": "Statistics by protocol"
+    },
+    "examples": [
+      {
+        "command": "netstat -tuln",
+        "explanation": "Show all TCP/UDP listening ports"
+      },
+      {
+        "command": "netstat -tunap",
+        "explanation": "Show all connections with program names"
+      },
+      {
+        "command": "netstat -rn",
+        "explanation": "Show routing table"
+      },
+      {
+        "command": "netstat -s",
+        "explanation": "Show network statistics"
+      }
+    ],
+    "tips": [
+      "Use ss instead of netstat (faster, more info)",
+      "netstat -tulnp | grep :80 to check specific port",
+      "May need sudo to see all process names"
+    ]
+  },
+  
+  "ss": {
+    "description": "Socket statistics - modern replacement for netstat",
+    "usage": "ss [OPTIONS]",
+    "category": "network",
+    "tags": ["network", "sockets", "connections", "ports"],
+    "common_options": {
+      "-t": "TCP sockets",
+      "-u": "UDP sockets",
+      "-l": "Listening sockets",
+      "-n": "Numeric addresses",
+      "-p": "Show processes",
+      "-a": "All sockets",
+      "-s": "Summary statistics"
+    },
+    "examples": [
+      {
+        "command": "ss -tuln",
+        "explanation": "Show listening TCP/UDP ports"
+      },
+      {
+        "command": "ss -tunap",
+        "explanation": "Show all connections with processes"
+      },
+      {
+        "command": "ss -s",
+        "explanation": "Show socket statistics summary"
+      },
+      {
+        "command": "ss -t state established",
+        "explanation": "Show established TCP connections"
+      }
+    ],
+    "tips": [
+      "ss is faster than netstat for large systems",
+      "Use ss -o to show timer information",
+      "ss can filter by state, address, port"
+    ]
+  },
+  
+  "ping": {
+    "description": "Send ICMP ECHO_REQUEST to network hosts - test connectivity",
+    "usage": "ping [OPTIONS] destination",
+    "category": "network",
+    "tags": ["network", "connectivity", "test", "reachability", "icmp"],
+    "common_options": {
+      "-c N": "Send N packets then stop",
+      "-i N": "Wait N seconds between packets",
+      "-s SIZE": "Packet size in bytes",
+      "-W N": "Timeout in seconds",
+      "-q": "Quiet output (summary only)",
+      "-f": "Flood ping (requires root)"
+    },
+    "examples": [
+      {
+        "command": "ping google.com",
+        "explanation": "Test connectivity to google.com"
+      },
+      {
+        "command": "ping -c 4 8.8.8.8",
+        "explanation": "Send 4 packets to Google DNS"
+      },
+      {
+        "command": "ping -i 2 -c 10 example.com",
+        "explanation": "Ping every 2 seconds, 10 times"
+      }
+    ],
+    "tips": [
+      "Press Ctrl+C to stop continuous ping",
+      "Low ping = good, high ping or packet loss = network issues",
+      "Use ping6 for IPv6 addresses"
+    ]
+  },
+  
+  "traceroute": {
+    "description": "Trace route to network host - show path packets take",
+    "usage": "traceroute [OPTIONS] host",
+    "category": "network",
+    "tags": ["network", "route", "path", "hops", "diagnostic"],
+    "examples": [
+      {
+        "command": "traceroute google.com",
+        "explanation": "Show route to google.com"
+      },
+      {
+        "command": "traceroute -n 8.8.8.8",
+        "explanation": "Don't resolve hostnames (faster)"
+      }
+    ],
+    "tips": [
+      "Each line shows a hop in the route",
+      "*** means that hop doesn't respond",
+      "Use mtr for continuous traceroute monitoring"
+    ]
+  },
+  
+  "kill": {
+    "description": "Send signal to process - terminate or control processes",
+    "usage": "kill [OPTIONS] PID",
+    "category": "process_management",
+    "tags": ["process", "terminate", "signal", "stop"],
+    "common_signals": {
+      "15 (TERM)": "Graceful termination (default)",
+      "9 (KILL)": "Force kill (immediate, no cleanup)",
+      "1 (HUP)": "Hangup (often reloads config)",
+      "2 (INT)": "Interrupt (Ctrl+C)",
+      "3 (QUIT)": "Quit with core dump",
+      "18 (CONT)": "Continue if stopped",
+      "19 (STOP)": "Stop process (pause)"
+    },
+    "examples": [
+      {
+        "command": "kill 1234",
+        "explanation": "Gracefully terminate process 1234"
+      },
+      {
+        "command": "kill -9 1234",
+        "explanation": "Force kill process 1234"
+      },
+      {
+        "command": "kill -HUP 1234",
+        "explanation": "Send HUP signal (often reloads config)"
+      },
+      {
+        "command": "killall nginx",
+        "explanation": "Kill all processes named nginx"
+      }
+    ],
+    "tips": [
+      "Always try kill (TERM) before kill -9",
+      "Use pkill to kill by name: pkill firefox",
+      "Get PID with ps, pgrep, or top"
+    ]
+  },
+  
+  "systemctl": {
+    "description": "Control systemd system and service manager",
+    "usage": "systemctl [OPTIONS] COMMAND [NAME]",
+    "category": "system_info",
+    "tags": ["service", "daemon", "systemd", "start", "stop", "system"],
+    "common_commands": {
+      "start": "Start service",
+      "stop": "Stop service",
+      "restart": "Restart service",
+      "reload": "Reload config without restart",
+      "status": "Show service status",
+      "enable": "Start on boot",
+      "disable": "Don't start on boot",
+      "is-active": "Check if running",
+      "is-enabled": "Check if starts on boot",
+      "list-units": "List all units"
+    },
+    "examples": [
+      {
+        "command": "systemctl status nginx",
+        "explanation": "Check nginx service status"
+      },
+      {
+        "command": "systemctl restart apache2",
+        "explanation": "Restart Apache web server"
+      },
+      {
+        "command": "systemctl enable ssh",
+        "explanation": "Enable SSH to start on boot"
+      },
+      {
+        "command": "systemctl list-units --type=service",
+        "explanation": "List all services"
+      }
+    ],
+    "tips": [
+      "Most commands require sudo",
+      "Use systemctl daemon-reload after editing unit files",
+      "View logs with journalctl -u service-name"
+    ]
+  },
+  
+  "journalctl": {
+    "description": "Query systemd journal logs",
+    "usage": "journalctl [OPTIONS]",
+    "category": "system_info",
+    "tags": ["log", "journal", "systemd", "messages", "debug"],
+    "common_options": {
+      "-u": "Show logs for specific unit/service",
+      "-f": "Follow logs (like tail -f)",
+      "-n N": "Show last N lines",
+      "-b": "Show logs since last boot",
+      "--since": "Show logs since time",
+      "--until": "Show logs until time",
+      "-p": "Filter by priority (err, warning, info)",
+      "-x": "Add explanatory help text",
+      "-e": "Jump to end"
+    },
+    "examples": [
+      {
+        "command": "journalctl -xe",
+        "explanation": "Show recent logs with explanations"
+      },
+      {
+        "command": "journalctl -u nginx -f",
+        "explanation": "Follow nginx logs in real-time"
+      },
+      {
+        "command": "journalctl --since today",
+        "explanation": "Show logs from today"
+      },
+      {
+        "command": "journalctl -p err -b",
+        "explanation": "Show errors since last boot"
+      }
+    ],
+    "tips": [
+      "Use --no-pager for scripts",
+      "journalctl --disk-usage shows space used by logs",
+      "Navigate with arrow keys, space, and q to quit"
+    ]
+  },
+  
+  "cron": {
+    "description": "Time-based job scheduler - run tasks automatically",
+    "usage": "crontab [OPTIONS]",
+    "category": "system_info",
+    "tags": ["schedule", "automation", "periodic", "task"],
+    "cron_format": "* * * * * command_to_execute",
+    "field_meaning": [
+      "minute (0-59)",
+      "hour (0-23)",
+      "day of month (1-31)",
+      "month (1-12)",
+      "day of week (0-7, 0 and 7 are Sunday)"
+    ],
+    "special_strings": {
+      "@reboot": "Run once at startup",
+      "@daily": "Run once a day (midnight)",
+      "@hourly": "Run once an hour",
+      "@weekly": "Run once a week",
+      "@monthly": "Run once a month"
+    },
+    "examples": [
+      {
+        "command": "crontab -e",
+        "explanation": "Edit cron jobs for current user"
+      },
+      {
+        "command": "crontab -l",
+        "explanation": "List current cron jobs"
+      },
+      {
+        "command": "0 2 * * * /backup.sh",
+        "explanation": "Run backup script daily at 2 AM"
+      },
+      {
+        "command": "*/15 * * * * /check.sh",
+        "explanation": "Run check script every 15 minutes"
+      }
+    ],
+    "tips": [
+      "Use full paths in cron jobs (PATH may differ)",
+      "Redirect output: command >> /var/log/cron.log 2>&1",
+      "Test your command manually before adding to cron"
+    ]
+  },
+  
+  "lsblk": {
+    "description": "List information about block devices - shows disks and partitions",
+    "usage": "lsblk [OPTIONS] [DEVICE]",
+    "category": "disk_management",
+    "tags": ["disk", "partition", "block", "device", "storage"],
+    "common_options": {
+      "-f": "Show filesystem information",
+      "-a": "Show all devices including empty ones",
+      "-o": "Specify output columns",
+      "-p": "Print full device paths",
+      "-S": "Show SCSI devices only",
+      "-t": "Show topology information"
+    },
+    "examples": [
+      {
+        "command": "lsblk",
+        "explanation": "List all block devices in tree format"
+      },
+      {
+        "command": "lsblk -f",
+        "explanation": "Show filesystems, UUIDs, and mount points"
+      },
+      {
+        "command": "lsblk -o NAME,SIZE,TYPE,MOUNTPOINT",
+        "explanation": "Custom column output"
+      }
+    ],
+    "tips": [
+      "Use lsblk -f to see filesystem types and UUIDs",
+      "Combine with grep: lsblk | grep disk",
+      "Shows device hierarchy (disk → partitions)"
+    ]
+  },
+  
+  "fdisk": {
+    "description": "Partition table manipulator for Linux - manage disk partitions",
+    "usage": "fdisk [OPTIONS] DEVICE",
+    "category": "disk_management",
+    "tags": ["partition", "disk", "management", "format"],
+    "common_options": {
+      "-l": "List partition tables",
+      "-u": "Use sectors instead of cylinders"
+    },
+    "examples": [
+      {
+        "command": "sudo fdisk -l",
+        "explanation": "List all partition tables (requires root)"
+      },
+      {
+        "command": "sudo fdisk /dev/sda",
+        "explanation": "Open fdisk for /dev/sda (interactive mode)"
+      }
+    ],
+    "tips": [
+      "Always use 'sudo' with fdisk",
+      "Use 'p' in interactive mode to print partition table",
+      "Use 'w' to write changes (careful!), 'q' to quit without saving",
+      "For GPT partitions, use 'gdisk' or 'parted' instead"
+    ]
+  },
+  
+  "iostat": {
+    "description": "Report CPU and I/O statistics - monitor disk performance",
+    "usage": "iostat [OPTIONS] [INTERVAL] [COUNT]",
+    "category": "system_info",
+    "tags": ["io", "disk", "performance", "statistics", "monitor"],
+    "common_options": {
+      "-x": "Extended statistics",
+      "-k": "Display in kilobytes",
+      "-m": "Display in megabytes",
+      "-d": "Display only device statistics",
+      "-c": "Display only CPU statistics",
+      "-t": "Print timestamp"
+    },
+    "examples": [
+      {
+        "command": "iostat",
+        "explanation": "Show CPU and device statistics once"
+      },
+      {
+        "command": "iostat -x 1 5",
+        "explanation": "Extended stats, update every 1 second, 5 times"
+      },
+      {
+        "command": "iostat -d -k 2",
+        "explanation": "Device stats in KB, update every 2 seconds"
+      }
+    ],
+    "tips": [
+      "High %util indicates disk bottleneck",
+      "Watch await (average wait time) for slow disks",
+      "Part of sysstat package - may need to install"
+    ]
+  },
+  
+  "lsof": {
+    "description": "List open files - shows which processes have which files open",
+    "usage": "lsof [OPTIONS] [FILE]",
+    "category": "system_info",
+    "tags": ["files", "open", "process", "port", "network"],
+    "common_options": {
+      "-i": "List network connections",
+      "-i :PORT": "Show what's using specific port",
+      "-u USER": "Show files opened by user",
+      "-p PID": "Show files opened by process",
+      "-t": "Terse output (PIDs only)",
+      "+D DIR": "Show processes using files in directory"
+    },
+    "examples": [
+      {
+        "command": "lsof -i :8080",
+        "explanation": "Show what's using port 8080"
+      },
+      {
+        "command": "lsof -u username",
+        "explanation": "Show all files opened by user"
+      },
+      {
+        "command": "lsof +D /var/log",
+        "explanation": "Show processes using /var/log files"
+      },
+      {
+        "command": "lsof -i TCP:1-1024",
+        "explanation": "Show processes using privileged ports"
+      }
+    ],
+    "tips": [
+      "May require sudo for full results",
+      "Use lsof -i to debug 'address already in use' errors",
+      "Combine with grep: lsof -i | grep LISTEN"
+    ]
+  },
+  
+  "dmesg": {
+    "description": "Display kernel ring buffer messages - system boot and hardware logs",
+    "usage": "dmesg [OPTIONS]",
+    "category": "system_info",
+    "tags": ["kernel", "boot", "hardware", "log", "debug"],
+    "common_options": {
+      "-T": "Human-readable timestamps",
+      "-L": "Color output",
+      "-l": "Filter by log level",
+      "-w": "Wait for new messages (follow)",
+      "-C": "Clear ring buffer",
+      "--level": "Filter by level (err, warn, info)"
+    },
+    "examples": [
+      {
+        "command": "dmesg",
+        "explanation": "Show all kernel messages"
+      },
+      {
+        "command": "dmesg -T",
+        "explanation": "Show with human-readable timestamps"
+      },
+      {
+        "command": "dmesg | grep -i error",
+        "explanation": "Find error messages"
+      },
+      {
+        "command": "dmesg -w",
+        "explanation": "Follow new kernel messages in real-time"
+      },
+      {
+        "command": "dmesg --level=err,warn",
+        "explanation": "Show only errors and warnings"
+      }
+    ],
+    "tips": [
+      "Useful for debugging hardware issues",
+      "Check after system boot for problems",
+      "Look for USB device info: dmesg | grep -i usb"
+    ]
+  },
+  
+  "vmstat": {
+    "description": "Report virtual memory statistics - system performance overview",
+    "usage": "vmstat [OPTIONS] [INTERVAL] [COUNT]",
+    "category": "system_info",
+    "tags": ["memory", "virtual", "performance", "statistics", "cpu"],
+    "common_options": {
+      "-a": "Active/inactive memory",
+      "-s": "Memory statistics summary",
+      "-d": "Disk statistics",
+      "-p": "Partition statistics",
+      "-S": "Units (k, K, m, M)"
+    },
+    "examples": [
+      {
+        "command": "vmstat",
+        "explanation": "Show current system statistics"
+      },
+      {
+        "command": "vmstat 2 5",
+        "explanation": "Update every 2 seconds, 5 times"
+      },
+      {
+        "command": "vmstat -s",
+        "explanation": "Show memory statistics summary"
+      }
+    ],
+    "tips": [
+      "High 'si' and 'so' indicate swapping (bad for performance)",
+      "Watch 'r' column for CPU queue length",
+      "First line shows averages since boot"
+    ]
+  },
+  
+  "blkid": {
+    "description": "Locate and print block device attributes - UUIDs, filesystems",
+    "usage": "blkid [OPTIONS] [DEVICE]",
+    "category": "disk_management",
+    "tags": ["block", "device", "uuid", "filesystem", "partition"],
+    "common_options": {
+      "-o": "Output format (value, device, list, full)",
+      "-s": "Show specific tag",
+      "-t": "Search by tag"
+    },
+    "examples": [
+      {
+        "command": "blkid",
+        "explanation": "Show all block device attributes"
+      },
+      {
+        "command": "blkid /dev/sda1",
+        "explanation": "Show attributes for specific device"
+      },
+      {
+        "command": "blkid -s UUID",
+        "explanation": "Show only UUIDs"
+      }
+    ],
+    "tips": [
+      "Use for finding UUIDs for /etc/fstab",
+      "May require sudo for some devices",
+      "Shows filesystem type and labels"
+    ]
+  },
+  
+  "parted": {
+    "description": "Partition editor - create, resize, and manage partitions",
+    "usage": "parted [OPTIONS] [DEVICE]",
+    "category": "disk_management",
+    "tags": ["partition", "disk", "resize", "gpt", "management"],
+    "common_options": {
+      "-l": "List partition layouts",
+      "-s": "Script mode (non-interactive)"
+    },
+    "examples": [
+      {
+        "command": "sudo parted -l",
+        "explanation": "List all partition tables"
+      },
+      {
+        "command": "sudo parted /dev/sda print",
+        "explanation": "Show partitions on /dev/sda"
+      }
+    ],
+    "tips": [
+      "Supports both MBR and GPT partition tables",
+      "Can resize partitions (use carefully!)",
+      "Always requires root privileges"
+    ]
+  },
+  
+  "mkfs": {
+    "description": "Make filesystem - format partitions with specific filesystem",
+    "usage": "mkfs.TYPE [OPTIONS] DEVICE",
+    "category": "disk_management",
+    "tags": ["format", "filesystem", "partition", "create"],
+    "filesystem_types": {
+      "ext4": "Standard Linux filesystem",
+      "ext3": "Older ext version",
+      "xfs": "High-performance filesystem",
+      "btrfs": "Modern copy-on-write filesystem",
+      "vfat": "FAT32 for USB drives"
+    },
+    "examples": [
+      {
+        "command": "sudo mkfs.ext4 /dev/sdb1",
+        "explanation": "Format partition as ext4"
+      },
+      {
+        "command": "sudo mkfs.vfat /dev/sdc1",
+        "explanation": "Format as FAT32 (for USB)"
+      },
+      {
+        "command": "sudo mkfs.ext4 -L MyDrive /dev/sdb1",
+        "explanation": "Format with label 'MyDrive'"
+      }
+    ],
+    "tips": [
+      "⚠️ DESTROYS ALL DATA on the partition!",
+      "Always double-check device name",
+      "Use lsblk to identify correct device first"
+    ]
+  },
+  
+  "sysctl": {
+    "description": "Configure kernel parameters at runtime",
+    "usage": "sysctl [OPTIONS] [VARIABLE[=VALUE]]",
+    "category": "system_info",
+    "tags": ["kernel", "tuning", "parameter", "configuration"],
+    "common_options": {
+      "-a": "Display all values",
+      "-w": "Write/set a value",
+      "-p": "Load values from file"
+    },
+    "examples": [
+      {
+        "command": "sysctl -a",
+        "explanation": "Show all kernel parameters"
+      },
+      {
+        "command": "sysctl vm.swappiness",
+        "explanation": "Show swappiness value"
+      },
+      {
+        "command": "sudo sysctl -w vm.swappiness=10",
+        "explanation": "Set swappiness to 10"
+      }
+    ],
+    "tips": [
+      "Changes are temporary unless added to /etc/sysctl.conf",
+      "Common tuning: net.ipv4.ip_forward, vm.swappiness",
+      "Reload config: sysctl -p"
+    ]
+  }
+}
