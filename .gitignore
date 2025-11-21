@@ -9,7 +9,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+# dist/ - Allow distribution packages
 downloads/
 eggs/
 .eggs/
