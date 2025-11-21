@@ -54,21 +54,23 @@
 │  │ comprehensive.json           │  │  ────                              │   │
 │  │ ────────────────────────     │  │                                    │   │
 │  │                              │  │  OPENAI_API_KEY=sk-...             │   │
-│  │  60+ Commands:               │  │  OPENAI_MODEL=gpt-4                │   │
+│  │  144 Commands:               │  │  OPENAI_MODEL=gpt-4                │   │
 │  │  • ls, grep, find, ps        │  │                                    │   │
 │  │  • df, du, top, netstat      │  │  Loaded by: python-dotenv          │   │
-│  │  • lsblk, fdisk, iostat      │  └────────────────────────────────────┘   │
-│  │  • vmstat, lsof, dmesg       │                                           │
-│  │                              │  ┌────────────────────────────────────┐   │
-│  │  30+ Combinations:           │  │  config.json                       │   │
-│  │  • Pipeline examples         │  │  ───────────                       │   │
-│  │  • Real-world scenarios      │  │                                    │   │
-│  │                              │  │  • LLM settings                    │   │
-│  │  Educational Data:           │  │  • Security patterns               │   │
-│  │  • Description               │  │  • Timeout config                  │   │
-│  │  • Usage patterns            │  │  • Dangerous command blocks        │   │
-│  │  • Common options            │  └────────────────────────────────────┘   │
-│  │  • Examples with explanations│                                           │
+│  │  • vim, nano, rsync, ssh     │  └────────────────────────────────────┘   │
+│  │  • nmap, strace, tmux        │                                           │
+│  │  • gzip, bzip2, xz           │  ┌────────────────────────────────────┐   │
+│  │  • awk, sed, cut, tr         │  │  config.json                       │   │
+│  │  • iptables, ufw, dig        │  │  ───────────                       │   │
+│  │                              │  │                                    │   │
+│  │  30+ Combinations:           │  │  • LLM settings                    │   │
+│  │  • Pipeline examples         │  │  • Security patterns               │   │
+│  │  • Real-world scenarios      │  │  • Timeout config                  │   │
+│  │                              │  │  • Dangerous command blocks        │   │
+│  │  430+ Examples:              │  └────────────────────────────────────┘   │
+│  │  • Description               │                                           │
+│  │  • Usage patterns            │                                           │
+│  │  • Common options            │                                           │
 │  │  • Tips & best practices     │                                           │
 │  └─────────────────────────────┘                                            │
 │                                                                              │

@@ -2762,5 +2762,1972 @@
       "Use for disk benchmarking",
       "Check SMART status too"
     ]
+  },
+  
+  "vim": {
+    "description": "Vi IMproved - advanced text editor",
+    "usage": "vim [OPTIONS] [FILE]",
+    "category": "text_processing",
+    "tags": ["editor", "text", "vi", "edit"],
+    "common_options": {
+      "-R": "Read-only mode",
+      "-n": "No swap file",
+      "+": "Start at specific line",
+      "-d": "Diff mode"
+    },
+    "examples": [
+      {
+        "command": "vim file.txt",
+        "explanation": "Open file for editing"
+      },
+      {
+        "command": "vim +10 file.txt",
+        "explanation": "Open at line 10"
+      },
+      {
+        "command": "vim -d file1 file2",
+        "explanation": "Compare two files"
+      }
+    ],
+    "tips": [
+      "Press i for insert mode, Esc to exit",
+      ":wq to save and quit, :q! to quit without saving",
+      "Learn vimtutor for basics"
+    ]
+  },
+  
+  "nano": {
+    "description": "Simple, easy-to-use text editor",
+    "usage": "nano [OPTIONS] [FILE]",
+    "category": "text_processing",
+    "tags": ["editor", "text", "simple", "beginner"],
+    "common_options": {
+      "-w": "Disable line wrapping",
+      "-m": "Enable mouse support",
+      "-l": "Show line numbers",
+      "-B": "Save backups"
+    },
+    "examples": [
+      {
+        "command": "nano file.txt",
+        "explanation": "Open file for editing"
+      },
+      {
+        "command": "nano -l file.txt",
+        "explanation": "Open with line numbers"
+      }
+    ],
+    "tips": [
+      "Ctrl+O to save, Ctrl+X to exit",
+      "Ctrl+K cuts line, Ctrl+U pastes",
+      "Commands shown at bottom"
+    ]
+  },
+  
+  "rsync": {
+    "description": "Fast, versatile file copying tool for remote and local",
+    "usage": "rsync [OPTIONS] SOURCE DEST",
+    "category": "file_operations",
+    "tags": ["sync", "copy", "backup", "remote", "transfer"],
+    "common_options": {
+      "-a": "Archive mode (recursive, preserves)",
+      "-v": "Verbose output",
+      "-z": "Compress during transfer",
+      "-P": "Show progress",
+      "--delete": "Delete files not in source"
+    },
+    "examples": [
+      {
+        "command": "rsync -avz /source/ /dest/",
+        "explanation": "Sync local directories"
+      },
+      {
+        "command": "rsync -avz -e ssh /local/ user@host:/remote/",
+        "explanation": "Sync to remote server"
+      },
+      {
+        "command": "rsync -avP --delete /source/ /backup/",
+        "explanation": "Mirror directory (delete extras)"
+      }
+    ],
+    "tips": [
+      "Trailing slash on source matters!",
+      "Use -n (dry-run) first to test",
+      "Much faster than cp for large transfers"
+    ]
+  },
+  
+  "scp": {
+    "description": "Secure copy - copy files between hosts over SSH",
+    "usage": "scp [OPTIONS] SOURCE DEST",
+    "category": "network",
+    "tags": ["copy", "ssh", "transfer", "secure", "remote"],
+    "common_options": {
+      "-r": "Recursive (copy directories)",
+      "-P": "Specify port",
+      "-p": "Preserve timestamps/permissions",
+      "-C": "Enable compression"
+    },
+    "examples": [
+      {
+        "command": "scp file.txt user@host:/path/",
+        "explanation": "Copy file to remote"
+      },
+      {
+        "command": "scp user@host:/path/file.txt .",
+        "explanation": "Copy file from remote"
+      },
+      {
+        "command": "scp -r directory/ user@host:/path/",
+        "explanation": "Copy directory recursively"
+      }
+    ],
+    "tips": [
+      "Use rsync for better resume capability",
+      "Can use wildcards: scp 'user@host:*.txt' .",
+      "Specify port: scp -P 2222"
+    ]
+  },
+  
+
+  
+  "alias": {
+    "description": "Create command aliases - shortcuts",
+    "usage": "alias [NAME='COMMAND']",
+    "category": "shell",
+    "tags": ["shell", "shortcut", "alias", "bash"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "alias",
+        "explanation": "List all aliases"
+      },
+      {
+        "command": "alias ll='ls -lah'",
+        "explanation": "Create alias for detailed listing"
+      },
+      {
+        "command": "alias update='sudo apt update && sudo apt upgrade'",
+        "explanation": "Create update alias"
+      }
+    ],
+    "tips": [
+      "Add to ~/.bashrc for permanence",
+      "Use unalias to remove",
+      "Check if alias exists: type ll"
+    ]
+  },
+  
+  "export": {
+    "description": "Set environment variables for child processes",
+    "usage": "export [NAME=VALUE]",
+    "category": "shell",
+    "tags": ["environment", "variable", "shell", "bash"],
+    "common_options": {
+      "-n": "Remove export attribute",
+      "-p": "List all exported variables"
+    },
+    "examples": [
+      {
+        "command": "export PATH=$PATH:/new/path",
+        "explanation": "Add to PATH variable"
+      },
+      {
+        "command": "export EDITOR=vim",
+        "explanation": "Set default editor"
+      },
+      {
+        "command": "export -p",
+        "explanation": "Show all exports"
+      }
+    ],
+    "tips": [
+      "Add to ~/.bashrc for persistence",
+      "Use env or printenv to view all",
+      "Unset with: unset VARNAME"
+    ]
+  },
+  
+  "source": {
+    "description": "Execute commands from file in current shell",
+    "usage": "source FILE or . FILE",
+    "category": "shell",
+    "tags": ["shell", "execute", "script", "bash"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "source ~/.bashrc",
+        "explanation": "Reload bash configuration"
+      },
+      {
+        "command": ". ~/.profile",
+        "explanation": "Load profile (same as source)"
+      },
+      {
+        "command": "source /etc/environment",
+        "explanation": "Load environment variables"
+      }
+    ],
+    "tips": [
+      "Changes affect current shell",
+      ". is shorthand for source",
+      "Use after editing config files"
+    ]
+  },
+  
+  "which": {
+    "description": "Locate a command - show full path",
+    "usage": "which [COMMAND]",
+    "category": "system_info",
+    "tags": ["command", "path", "locate", "find"],
+    "common_options": {
+      "-a": "Show all matches"
+    },
+    "examples": [
+      {
+        "command": "which python",
+        "explanation": "Find python executable path"
+      },
+      {
+        "command": "which -a python",
+        "explanation": "Show all python in PATH"
+      }
+    ],
+    "tips": [
+      "Shows first match in $PATH",
+      "Use type -a for aliases too",
+      "whereis shows more info"
+    ]
+  },
+  
+  "whereis": {
+    "description": "Locate binary, source, and manual page files",
+    "usage": "whereis [OPTIONS] COMMAND",
+    "category": "system_info",
+    "tags": ["command", "locate", "find", "binary"],
+    "common_options": {
+      "-b": "Search only for binaries",
+      "-m": "Search only for manuals",
+      "-s": "Search only for sources"
+    },
+    "examples": [
+      {
+        "command": "whereis ls",
+        "explanation": "Find ls binary and manual"
+      },
+      {
+        "command": "whereis -b python",
+        "explanation": "Find only python binary"
+      }
+    ],
+    "tips": [
+      "Shows binary, source, and man pages",
+      "Faster than find",
+      "Use which for PATH-only search"
+    ]
+  },
+  
+  "xargs": {
+    "description": "Build and execute commands from standard input",
+    "usage": "xargs [OPTIONS] [COMMAND]",
+    "category": "text_processing",
+    "tags": ["pipe", "command", "input", "batch"],
+    "common_options": {
+      "-n": "Max args per command",
+      "-I": "Replace string",
+      "-P": "Parallel execution",
+      "-0": "Null-separated input",
+      "-t": "Print command before executing"
+    },
+    "examples": [
+      {
+        "command": "find . -name '*.txt' | xargs grep 'pattern'",
+        "explanation": "Search pattern in found files"
+      },
+      {
+        "command": "ls *.jpg | xargs -n 1 -I {} convert {} {}.png",
+        "explanation": "Convert each file"
+      },
+      {
+        "command": "find . -name '*.log' -print0 | xargs -0 rm",
+        "explanation": "Delete files safely (handles spaces)"
+      }
+    ],
+    "tips": [
+      "Use -0 with find -print0 for spaces",
+      "Use -P for parallel processing",
+      "Great for batch operations"
+    ]
+  },
+  
+  "tee": {
+    "description": "Read from stdin and write to stdout and files",
+    "usage": "tee [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["pipe", "output", "redirect", "duplicate"],
+    "common_options": {
+      "-a": "Append (don't overwrite)",
+      "-i": "Ignore interrupt signals"
+    },
+    "examples": [
+      {
+        "command": "ls -l | tee output.txt",
+        "explanation": "View and save output"
+      },
+      {
+        "command": "command | tee -a log.txt | grep error",
+        "explanation": "Log and filter simultaneously"
+      },
+      {
+        "command": "echo 'text' | sudo tee /etc/file",
+        "explanation": "Write to protected file"
+      }
+    ],
+    "tips": [
+      "Useful for viewing and logging",
+      "Can output to multiple files",
+      "Use with sudo for protected files"
+    ]
+  },
+  
+  "diff": {
+    "description": "Compare files line by line",
+    "usage": "diff [OPTIONS] FILE1 FILE2",
+    "category": "file_operations",
+    "tags": ["compare", "difference", "patch", "files"],
+    "common_options": {
+      "-u": "Unified format (better readability)",
+      "-r": "Recursive (directories)",
+      "-w": "Ignore whitespace",
+      "-q": "Brief (only report if different)",
+      "-y": "Side-by-side"
+    },
+    "examples": [
+      {
+        "command": "diff file1.txt file2.txt",
+        "explanation": "Compare two files"
+      },
+      {
+        "command": "diff -u old.txt new.txt > changes.patch",
+        "explanation": "Create patch file"
+      },
+      {
+        "command": "diff -r dir1/ dir2/",
+        "explanation": "Compare directories"
+      }
+    ],
+    "tips": [
+      "Use -u for better readability",
+      "Create patches for version control",
+      "Use diff -q for quick check"
+    ]
+  },
+  
+  "patch": {
+    "description": "Apply a diff file to original",
+    "usage": "patch [OPTIONS] [ORIGINAL [PATCHFILE]]",
+    "category": "file_operations",
+    "tags": ["apply", "diff", "update", "changes"],
+    "common_options": {
+      "-p": "Strip leading directories",
+      "-R": "Reverse patch",
+      "-dry-run": "Test without applying"
+    },
+    "examples": [
+      {
+        "command": "patch < changes.patch",
+        "explanation": "Apply patch file"
+      },
+      {
+        "command": "patch -p1 < file.patch",
+        "explanation": "Apply with directory stripping"
+      },
+      {
+        "command": "patch --dry-run < changes.patch",
+        "explanation": "Test patch application"
+      }
+    ],
+    "tips": [
+      "Use --dry-run first to test",
+      "Create patches with diff -u",
+      "Use -R to reverse changes"
+    ]
+  },
+  
+  "watch": {
+    "description": "Execute program periodically, showing output fullscreen",
+    "usage": "watch [OPTIONS] COMMAND",
+    "category": "system_info",
+    "tags": ["monitor", "periodic", "repeat", "observe"],
+    "common_options": {
+      "-n": "Interval in seconds",
+      "-d": "Highlight differences",
+      "-t": "No title",
+      "-b": "Beep on error"
+    },
+    "examples": [
+      {
+        "command": "watch df -h",
+        "explanation": "Monitor disk space every 2 seconds"
+      },
+      {
+        "command": "watch -n 5 ls -l",
+        "explanation": "Check directory every 5 seconds"
+      },
+      {
+        "command": "watch -d 'ps aux | grep nginx'",
+        "explanation": "Monitor nginx processes, highlight changes"
+      }
+    ],
+    "tips": [
+      "Press Ctrl+C to exit",
+      "Default interval is 2 seconds",
+      "Use -d to see what changed"
+    ]
+  },
+  
+  "nmap": {
+    "description": "Network exploration tool and security scanner",
+    "usage": "nmap [OPTIONS] HOST",
+    "category": "network",
+    "tags": ["scan", "port", "security", "network", "discovery"],
+    "common_options": {
+      "-sS": "TCP SYN scan",
+      "-sV": "Version detection",
+      "-p": "Specify ports",
+      "-A": "Aggressive scan (OS, version)",
+      "-Pn": "Skip host discovery"
+    },
+    "examples": [
+      {
+        "command": "nmap 192.168.1.1",
+        "explanation": "Basic port scan"
+      },
+      {
+        "command": "nmap -sV -p 80,443 example.com",
+        "explanation": "Scan specific ports with version detection"
+      },
+      {
+        "command": "nmap -A 192.168.1.0/24",
+        "explanation": "Scan entire subnet with OS detection"
+      }
+    ],
+    "tips": [
+      "Requires root for some scan types",
+      "Use responsibly - may trigger IDS",
+      "Great for network inventory"
+    ]
+  },
+  
+  "nc": {
+    "description": "Netcat - networking Swiss Army knife",
+    "usage": "nc [OPTIONS] HOST PORT",
+    "category": "network",
+    "tags": ["netcat", "tcp", "udp", "port", "socket"],
+    "common_options": {
+      "-l": "Listen mode",
+      "-v": "Verbose",
+      "-z": "Scan mode (no data)",
+      "-u": "UDP mode",
+      "-w": "Timeout"
+    },
+    "examples": [
+      {
+        "command": "nc -zv example.com 80",
+        "explanation": "Check if port 80 is open"
+      },
+      {
+        "command": "nc -l 8080",
+        "explanation": "Listen on port 8080"
+      },
+      {
+        "command": "echo 'GET / HTTP/1.0' | nc google.com 80",
+        "explanation": "Simple HTTP request"
+      }
+    ],
+    "tips": [
+      "Great for port testing",
+      "Can transfer files",
+      "Use for debugging network issues"
+    ]
+  },
+  
+  "dig": {
+    "description": "DNS lookup utility",
+    "usage": "dig [@SERVER] DOMAIN [TYPE]",
+    "category": "network",
+    "tags": ["dns", "lookup", "query", "nameserver"],
+    "common_options": {
+      "+short": "Short output",
+      "+trace": "Trace delegation path",
+      "-x": "Reverse lookup",
+      "@": "Specify DNS server"
+    },
+    "examples": [
+      {
+        "command": "dig example.com",
+        "explanation": "Query A records"
+      },
+      {
+        "command": "dig +short example.com",
+        "explanation": "Show IP only"
+      },
+      {
+        "command": "dig example.com MX",
+        "explanation": "Query mail servers"
+      },
+      {
+        "command": "dig @8.8.8.8 example.com",
+        "explanation": "Use Google DNS"
+      }
+    ],
+    "tips": [
+      "Use +short for clean output",
+      "Query types: A, AAAA, MX, NS, TXT",
+      "More detailed than nslookup"
+    ]
+  },
+  
+  "host": {
+    "description": "DNS lookup utility - simpler than dig",
+    "usage": "host [OPTIONS] NAME [SERVER]",
+    "category": "network",
+    "tags": ["dns", "lookup", "simple", "query"],
+    "common_options": {
+      "-t": "Query type",
+      "-a": "All records",
+      "-v": "Verbose"
+    },
+    "examples": [
+      {
+        "command": "host example.com",
+        "explanation": "Simple DNS lookup"
+      },
+      {
+        "command": "host -t MX example.com",
+        "explanation": "Query mail servers"
+      },
+      {
+        "command": "host 8.8.8.8",
+        "explanation": "Reverse DNS lookup"
+      }
+    ],
+    "tips": [
+      "Simpler than dig",
+      "Good for quick lookups",
+      "Supports IPv6"
+    ]
+  },
+  
+  "nslookup": {
+    "description": "Query Internet name servers interactively",
+    "usage": "nslookup [HOST] [SERVER]",
+    "category": "network",
+    "tags": ["dns", "lookup", "query", "interactive"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "nslookup example.com",
+        "explanation": "Basic DNS query"
+      },
+      {
+        "command": "nslookup example.com 8.8.8.8",
+        "explanation": "Query specific DNS server"
+      },
+      {
+        "command": "nslookup",
+        "explanation": "Interactive mode"
+      }
+    ],
+    "tips": [
+      "Can run interactively",
+      "dig is more powerful",
+      "Set type for specific records"
+    ]
+  },
+  
+  "whois": {
+    "description": "Query domain registration information",
+    "usage": "whois DOMAIN",
+    "category": "network",
+    "tags": ["domain", "registration", "info", "lookup"],
+    "common_options": {
+      "-H": "Hide legal disclaimers"
+    },
+    "examples": [
+      {
+        "command": "whois example.com",
+        "explanation": "Domain registration info"
+      },
+      {
+        "command": "whois -H example.com | grep -i name",
+        "explanation": "Find registrant name"
+      }
+    ],
+    "tips": [
+      "Shows registrar, dates, nameservers",
+      "Use for domain investigation",
+      "May be rate-limited"
+    ]
+  },
+  
+  "iptables": {
+    "description": "Administration tool for IPv4 packet filtering and NAT",
+    "usage": "iptables [OPTIONS] CHAIN RULE",
+    "category": "network",
+    "tags": ["firewall", "security", "filter", "nat"],
+    "common_options": {
+      "-A": "Append rule",
+      "-D": "Delete rule",
+      "-L": "List rules",
+      "-F": "Flush rules",
+      "-P": "Set policy"
+    },
+    "examples": [
+      {
+        "command": "sudo iptables -L",
+        "explanation": "List all rules"
+      },
+      {
+        "command": "sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT",
+        "explanation": "Allow SSH port"
+      },
+      {
+        "command": "sudo iptables -F",
+        "explanation": "Flush all rules"
+      }
+    ],
+    "tips": [
+      "⚠️ Can lock you out of remote systems!",
+      "Save rules: iptables-save",
+      "Use ufw for simpler firewall"
+    ]
+  },
+  
+  "ufw": {
+    "description": "Uncomplicated Firewall - easy iptables frontend",
+    "usage": "ufw COMMAND",
+    "category": "network",
+    "tags": ["firewall", "security", "simple", "iptables"],
+    "common_options": {
+      "enable": "Enable firewall",
+      "disable": "Disable firewall",
+      "status": "Show status",
+      "allow": "Allow port/service",
+      "deny": "Deny port/service"
+    },
+    "examples": [
+      {
+        "command": "sudo ufw enable",
+        "explanation": "Enable firewall"
+      },
+      {
+        "command": "sudo ufw allow 22",
+        "explanation": "Allow SSH"
+      },
+      {
+        "command": "sudo ufw status numbered",
+        "explanation": "Show rules with numbers"
+      },
+      {
+        "command": "sudo ufw deny from 192.168.1.100",
+        "explanation": "Block specific IP"
+      }
+    ],
+    "tips": [
+      "Much simpler than iptables",
+      "Enable before setting rules",
+      "Check status after changes"
+    ]
+  },
+  
+  "strace": {
+    "description": "Trace system calls and signals",
+    "usage": "strace [OPTIONS] COMMAND",
+    "category": "system_info",
+    "tags": ["debug", "trace", "syscall", "troubleshoot"],
+    "common_options": {
+      "-p": "Attach to PID",
+      "-e": "Filter syscalls",
+      "-c": "Count calls",
+      "-o": "Output to file",
+      "-f": "Follow forks"
+    },
+    "examples": [
+      {
+        "command": "strace ls",
+        "explanation": "Trace ls command"
+      },
+      {
+        "command": "strace -p 1234",
+        "explanation": "Trace running process"
+      },
+      {
+        "command": "strace -e open,read ls",
+        "explanation": "Trace only open/read calls"
+      },
+      {
+        "command": "strace -c ls",
+        "explanation": "Summary of system calls"
+      }
+    ],
+    "tips": [
+      "Great for debugging",
+      "Use -e to filter noise",
+      "Use ltrace for library calls"
+    ]
+  },
+  
+  "ltrace": {
+    "description": "Trace library calls",
+    "usage": "ltrace [OPTIONS] COMMAND",
+    "category": "system_info",
+    "tags": ["debug", "trace", "library", "calls"],
+    "common_options": {
+      "-p": "Attach to PID",
+      "-c": "Count calls",
+      "-o": "Output to file",
+      "-S": "Show system calls too"
+    },
+    "examples": [
+      {
+        "command": "ltrace ls",
+        "explanation": "Trace library calls"
+      },
+      {
+        "command": "ltrace -c program",
+        "explanation": "Count library calls"
+      }
+    ],
+    "tips": [
+      "Complements strace",
+      "Shows library function calls",
+      "Useful for debugging libraries"
+    ]
+  },
+  
+  "ldd": {
+    "description": "Print shared library dependencies",
+    "usage": "ldd [OPTIONS] FILE",
+    "category": "system_info",
+    "tags": ["library", "dependencies", "shared", "debug"],
+    "common_options": {
+      "-v": "Verbose",
+      "-r": "Check relocations",
+      "-u": "Show unused dependencies"
+    },
+    "examples": [
+      {
+        "command": "ldd /bin/ls",
+        "explanation": "Show ls dependencies"
+      },
+      {
+        "command": "ldd -v program",
+        "explanation": "Verbose dependency info"
+      }
+    ],
+    "tips": [
+      "Useful for troubleshooting missing libraries",
+      "Shows library paths",
+      "⚠️ Don't run on untrusted binaries"
+    ]
+  },
+  
+  "env": {
+    "description": "Run program in modified environment or print environment",
+    "usage": "env [OPTIONS] [NAME=VALUE]... [COMMAND]",
+    "category": "shell",
+    "tags": ["environment", "variable", "shell"],
+    "common_options": {
+      "-i": "Start with empty environment",
+      "-u": "Unset variable",
+      "-": "Ignore environment"
+    },
+    "examples": [
+      {
+        "command": "env",
+        "explanation": "Print all environment variables"
+      },
+      {
+        "command": "env VAR=value command",
+        "explanation": "Run command with variable set"
+      },
+      {
+        "command": "env -i PATH=/bin ls",
+        "explanation": "Run with clean environment"
+      }
+    ],
+    "tips": [
+      "Use to see all environment vars",
+      "Test commands with different env",
+      "Useful for debugging PATH issues"
+    ]
+  },
+  
+  "printenv": {
+    "description": "Print environment variables",
+    "usage": "printenv [VARIABLE]",
+    "category": "shell",
+    "tags": ["environment", "variable", "shell"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "printenv",
+        "explanation": "Print all variables"
+      },
+      {
+        "command": "printenv PATH",
+        "explanation": "Print PATH variable"
+      },
+      {
+        "command": "printenv | grep JAVA",
+        "explanation": "Find Java-related variables"
+      }
+    ],
+    "tips": [
+      "Similar to env",
+      "Can print specific variable",
+      "Useful for debugging"
+    ]
+  },
+  
+  "basename": {
+    "description": "Strip directory and suffix from filenames",
+    "usage": "basename NAME [SUFFIX]",
+    "category": "file_operations",
+    "tags": ["path", "filename", "strip"],
+    "common_options": {
+      "-s": "Remove suffix",
+      "-a": "Support multiple arguments"
+    },
+    "examples": [
+      {
+        "command": "basename /path/to/file.txt",
+        "explanation": "Get filename: file.txt"
+      },
+      {
+        "command": "basename /path/to/file.txt .txt",
+        "explanation": "Get name without extension: file"
+      },
+      {
+        "command": "basename -a /path/f1 /path/f2",
+        "explanation": "Multiple files"
+      }
+    ],
+    "tips": [
+      "Useful in shell scripts",
+      "Opposite of dirname",
+      "Handles trailing slashes"
+    ]
+  },
+  
+  "dirname": {
+    "description": "Strip last component from file name",
+    "usage": "dirname NAME",
+    "category": "file_operations",
+    "tags": ["path", "directory", "strip"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "dirname /path/to/file.txt",
+        "explanation": "Get directory: /path/to"
+      },
+      {
+        "command": "cd $(dirname $0)",
+        "explanation": "Go to script directory"
+      }
+    ],
+    "tips": [
+      "Useful in shell scripts",
+      "Opposite of basename",
+      "Returns path without filename"
+    ]
+  },
+  
+  "realpath": {
+    "description": "Print resolved absolute file name",
+    "usage": "realpath [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["path", "absolute", "resolve", "canonical"],
+    "common_options": {
+      "-s": "Don't expand symlinks",
+      "--relative-to": "Print relative path"
+    },
+    "examples": [
+      {
+        "command": "realpath file.txt",
+        "explanation": "Get absolute path"
+      },
+      {
+        "command": "realpath ../dir",
+        "explanation": "Resolve relative path"
+      },
+      {
+        "command": "realpath symlink",
+        "explanation": "Resolve symlink to target"
+      }
+    ],
+    "tips": [
+      "Resolves . and .. in paths",
+      "Follows symlinks by default",
+      "Useful for getting canonical paths"
+    ]
+  },
+  
+  "file": {
+    "description": "Determine file type",
+    "usage": "file [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["type", "identify", "format", "magic"],
+    "common_options": {
+      "-b": "Brief mode (no filename)",
+      "-i": "MIME type",
+      "-z": "Look inside compressed files"
+    },
+    "examples": [
+      {
+        "command": "file document.pdf",
+        "explanation": "Identify file type"
+      },
+      {
+        "command": "file -i file.txt",
+        "explanation": "Show MIME type"
+      },
+      {
+        "command": "file *",
+        "explanation": "Check all files in directory"
+      }
+    ],
+    "tips": [
+      "Doesn't rely on file extension",
+      "Checks file content/magic numbers",
+      "Use -i for MIME types"
+    ]
+  },
+  
+  "stat": {
+    "description": "Display file or file system status",
+    "usage": "stat [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["info", "metadata", "permissions", "inode"],
+    "common_options": {
+      "-c": "Custom format",
+      "-f": "File system status",
+      "-L": "Follow symlinks"
+    },
+    "examples": [
+      {
+        "command": "stat file.txt",
+        "explanation": "Show detailed file information"
+      },
+      {
+        "command": "stat -f .",
+        "explanation": "Show filesystem information"
+      },
+      {
+        "command": "stat -c '%a %n' file",
+        "explanation": "Show octal permissions and name"
+      }
+    ],
+    "tips": [
+      "More detailed than ls -l",
+      "Shows inode, blocks, times",
+      "Use for forensics/debugging"
+    ]
+  },
+  
+  "nice": {
+    "description": "Run program with modified scheduling priority",
+    "usage": "nice [OPTIONS] COMMAND",
+    "category": "process_management",
+    "tags": ["priority", "cpu", "schedule", "process"],
+    "common_options": {
+      "-n": "Niceness value (-20 to 19)"
+    },
+    "examples": [
+      {
+        "command": "nice -n 10 command",
+        "explanation": "Run with lower priority"
+      },
+      {
+        "command": "nice command",
+        "explanation": "Default niceness +10"
+      },
+      {
+        "command": "nice -n -5 command",
+        "explanation": "Higher priority (requires root)"
+      }
+    ],
+    "tips": [
+      "Higher number = lower priority",
+      "Default is +10",
+      "Use for background tasks"
+    ]
+  },
+  
+  "renice": {
+    "description": "Alter priority of running processes",
+    "usage": "renice PRIORITY -p PID",
+    "category": "process_management",
+    "tags": ["priority", "change", "process", "cpu"],
+    "common_options": {
+      "-p": "Process ID",
+      "-u": "User",
+      "-g": "Process group"
+    },
+    "examples": [
+      {
+        "command": "renice +5 -p 1234",
+        "explanation": "Lower priority of process"
+      },
+      {
+        "command": "renice -5 -u username",
+        "explanation": "Change all user's processes"
+      }
+    ],
+    "tips": [
+      "Can change running processes",
+      "Non-root can only increase niceness",
+      "Root can set any value"
+    ]
+  },
+  
+
+  
+  "killall": {
+    "description": "Kill processes by name",
+    "usage": "killall [OPTIONS] NAME",
+    "category": "process_management",
+    "tags": ["signal", "terminate", "process", "name"],
+    "common_options": {
+      "-9": "SIGKILL (force)",
+      "-i": "Interactive confirmation",
+      "-u": "Kill user's processes",
+      "-v": "Verbose"
+    },
+    "examples": [
+      {
+        "command": "killall firefox",
+        "explanation": "Kill all firefox processes"
+      },
+      {
+        "command": "killall -9 -u username",
+        "explanation": "Force kill user's processes"
+      },
+      {
+        "command": "killall -i nginx",
+        "explanation": "Kill with confirmation"
+      }
+    ],
+    "tips": [
+      "Kills all matching processes",
+      "Be careful with common names!",
+      "Use -i for safety"
+    ]
+  },
+  
+  "pkill": {
+    "description": "Signal processes based on name and attributes",
+    "usage": "pkill [OPTIONS] PATTERN",
+    "category": "process_management",
+    "tags": ["signal", "terminate", "process", "pattern"],
+    "common_options": {
+      "-9": "SIGKILL",
+      "-u": "User",
+      "-f": "Match full command line",
+      "-x": "Exact match"
+    },
+    "examples": [
+      {
+        "command": "pkill firefox",
+        "explanation": "Kill processes matching firefox"
+      },
+      {
+        "command": "pkill -u username",
+        "explanation": "Kill user's processes"
+      },
+      {
+        "command": "pkill -f 'python.*script.py'",
+        "explanation": "Match full command line"
+      }
+    ],
+    "tips": [
+      "More flexible than killall",
+      "Supports regex patterns",
+      "Use pgrep to test pattern first"
+    ]
+  },
+  
+  "pgrep": {
+    "description": "Look up processes based on name and attributes",
+    "usage": "pgrep [OPTIONS] PATTERN",
+    "category": "process_management",
+    "tags": ["find", "search", "process", "pattern"],
+    "common_options": {
+      "-l": "List name and PID",
+      "-u": "User",
+      "-f": "Match full command line",
+      "-a": "List full command line"
+    },
+    "examples": [
+      {
+        "command": "pgrep firefox",
+        "explanation": "Find firefox PIDs"
+      },
+      {
+        "command": "pgrep -l python",
+        "explanation": "List python processes with names"
+      },
+      {
+        "command": "pgrep -u username",
+        "explanation": "Find user's process PIDs"
+      },
+      {
+        "command": "pgrep -a nginx",
+        "explanation": "Show full command lines"
+      }
+    ],
+    "tips": [
+      "Test patterns before using pkill",
+      "Use -a to see full commands",
+      "Safer than parsing ps output"
+    ]
+  },
+  
+  "nohup": {
+    "description": "Run command immune to hangups, output to nohup.out",
+    "usage": "nohup COMMAND [ARGS]",
+    "category": "process_management",
+    "tags": ["background", "detach", "persist", "logout"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "nohup long-running-command &",
+        "explanation": "Run in background, immune to logout"
+      },
+      {
+        "command": "nohup ./script.sh > output.log 2>&1 &",
+        "explanation": "Redirect output to specific file"
+      }
+    ],
+    "tips": [
+      "Output goes to nohup.out by default",
+      "Use & to run in background",
+      "Process continues after logout"
+    ]
+  },
+  
+  "screen": {
+    "description": "Full-screen window manager with terminal multiplexing",
+    "usage": "screen [OPTIONS] [COMMAND]",
+    "category": "shell",
+    "tags": ["terminal", "multiplex", "session", "detach"],
+    "common_options": {
+      "-S": "Session name",
+      "-ls": "List sessions",
+      "-r": "Reattach to session",
+      "-d": "Detach session"
+    },
+    "examples": [
+      {
+        "command": "screen",
+        "explanation": "Start new screen session"
+      },
+      {
+        "command": "screen -S mysession",
+        "explanation": "Start named session"
+      },
+      {
+        "command": "screen -ls",
+        "explanation": "List all sessions"
+      },
+      {
+        "command": "screen -r mysession",
+        "explanation": "Reattach to session"
+      }
+    ],
+    "tips": [
+      "Ctrl+A D to detach",
+      "Ctrl+A C to create window",
+      "Survives disconnection"
+    ]
+  },
+  
+  "tmux": {
+    "description": "Terminal multiplexer - better than screen",
+    "usage": "tmux [COMMAND]",
+    "category": "shell",
+    "tags": ["terminal", "multiplex", "session", "window"],
+    "common_options": {
+      "new": "New session",
+      "attach": "Attach to session",
+      "ls": "List sessions",
+      "kill-session": "Kill session"
+    },
+    "examples": [
+      {
+        "command": "tmux",
+        "explanation": "Start new session"
+      },
+      {
+        "command": "tmux new -s work",
+        "explanation": "Start named session"
+      },
+      {
+        "command": "tmux ls",
+        "explanation": "List sessions"
+      },
+      {
+        "command": "tmux attach -t work",
+        "explanation": "Attach to session"
+      }
+    ],
+    "tips": [
+      "Ctrl+B D to detach",
+      "Ctrl+B C to create window",
+      "More powerful than screen"
+    ]
+  },
+  
+  "cut": {
+    "description": "Remove sections from lines of files",
+    "usage": "cut [OPTIONS] FILE",
+    "category": "text_processing",
+    "tags": ["text", "column", "extract", "field"],
+    "common_options": {
+      "-d": "Delimiter",
+      "-f": "Fields to select",
+      "-c": "Characters to select",
+      "-b": "Bytes to select"
+    },
+    "examples": [
+      {
+        "command": "cut -d: -f1,3 /etc/passwd",
+        "explanation": "Extract fields 1 and 3 (colon delimiter)"
+      },
+      {
+        "command": "cut -c1-10 file.txt",
+        "explanation": "Extract first 10 characters"
+      },
+      {
+        "command": "echo 'a:b:c:d' | cut -d: -f2-3",
+        "explanation": "Extract fields 2-3: b:c"
+      }
+    ],
+    "tips": [
+      "Great for column extraction",
+      "Use with pipes",
+      "Simpler than awk for basic tasks"
+    ]
+  },
+  
+  "paste": {
+    "description": "Merge lines of files",
+    "usage": "paste [OPTIONS] FILE1 FILE2",
+    "category": "text_processing",
+    "tags": ["merge", "combine", "column", "join"],
+    "common_options": {
+      "-d": "Delimiter (default tab)",
+      "-s": "Serial (one file at a time)"
+    },
+    "examples": [
+      {
+        "command": "paste file1 file2",
+        "explanation": "Merge side by side with tab"
+      },
+      {
+        "command": "paste -d',' file1 file2",
+        "explanation": "Merge with comma"
+      },
+      {
+        "command": "paste -s file.txt",
+        "explanation": "Merge all lines into one"
+      }
+    ],
+    "tips": [
+      "Opposite of cut",
+      "Good for combining columns",
+      "Use - for stdin"
+    ]
+  },
+  
+  "tr": {
+    "description": "Translate or delete characters",
+    "usage": "tr [OPTIONS] SET1 [SET2]",
+    "category": "text_processing",
+    "tags": ["translate", "replace", "delete", "character"],
+    "common_options": {
+      "-d": "Delete characters",
+      "-s": "Squeeze repeats",
+      "-c": "Complement SET1"
+    },
+    "examples": [
+      {
+        "command": "echo 'hello' | tr 'a-z' 'A-Z'",
+        "explanation": "Convert to uppercase"
+      },
+      {
+        "command": "echo 'hello  world' | tr -s ' '",
+        "explanation": "Squeeze multiple spaces"
+      },
+      {
+        "command": "echo 'hello123' | tr -d '0-9'",
+        "explanation": "Delete all digits"
+      },
+      {
+        "command": "cat file | tr '\\n' ','",
+        "explanation": "Replace newlines with commas"
+      }
+    ],
+    "tips": [
+      "Works on stdin only",
+      "Fast character-level operations",
+      "Use ranges: a-z, 0-9"
+    ]
+  },
+  
+  "join": {
+    "description": "Join lines of two files on common field",
+    "usage": "join [OPTIONS] FILE1 FILE2",
+    "category": "text_processing",
+    "tags": ["merge", "combine", "database", "field"],
+    "common_options": {
+      "-t": "Field separator",
+      "-1": "Join on FILE1 field",
+      "-2": "Join on FILE2 field",
+      "-a": "Include unmatched lines"
+    },
+    "examples": [
+      {
+        "command": "join file1.txt file2.txt",
+        "explanation": "Join on first field"
+      },
+      {
+        "command": "join -t: -1 1 -2 1 file1 file2",
+        "explanation": "Join colon-delimited files"
+      }
+    ],
+    "tips": [
+      "Files must be sorted on join field",
+      "Like SQL JOIN",
+      "Use sort first if needed"
+    ]
+  },
+  
+  "comm": {
+    "description": "Compare two sorted files line by line",
+    "usage": "comm [OPTIONS] FILE1 FILE2",
+    "category": "file_operations",
+    "tags": ["compare", "difference", "sorted"],
+    "common_options": {
+      "-1": "Suppress lines unique to FILE1",
+      "-2": "Suppress lines unique to FILE2",
+      "-3": "Suppress lines in both files"
+    },
+    "examples": [
+      {
+        "command": "comm file1.txt file2.txt",
+        "explanation": "Show 3 columns: unique to 1, unique to 2, common"
+      },
+      {
+        "command": "comm -12 file1.txt file2.txt",
+        "explanation": "Show only common lines"
+      },
+      {
+        "command": "comm -3 file1.txt file2.txt",
+        "explanation": "Show only unique lines"
+      }
+    ],
+    "tips": [
+      "Files must be sorted",
+      "Use sort first if needed",
+      "Useful for set operations"
+    ]
+  },
+  
+  "uniq": {
+    "description": "Report or omit repeated lines",
+    "usage": "uniq [OPTIONS] [INPUT [OUTPUT]]",
+    "category": "text_processing",
+    "tags": ["unique", "duplicate", "count", "sort"],
+    "common_options": {
+      "-c": "Count occurrences",
+      "-d": "Only duplicates",
+      "-u": "Only unique",
+      "-i": "Case insensitive"
+    },
+    "examples": [
+      {
+        "command": "sort file.txt | uniq",
+        "explanation": "Remove duplicate lines"
+      },
+      {
+        "command": "sort file.txt | uniq -c",
+        "explanation": "Count occurrences"
+      },
+      {
+        "command": "sort file.txt | uniq -d",
+        "explanation": "Show only duplicates"
+      }
+    ],
+    "tips": [
+      "Input must be sorted!",
+      "Use: sort | uniq",
+      "sort -u is similar"
+    ]
+  },
+  
+  "column": {
+    "description": "Format input into multiple columns",
+    "usage": "column [OPTIONS] [FILE]",
+    "category": "text_processing",
+    "tags": ["format", "table", "align", "columns"],
+    "common_options": {
+      "-t": "Table format",
+      "-s": "Separator",
+      "-c": "Output width"
+    },
+    "examples": [
+      {
+        "command": "cat data.csv | column -t -s,",
+        "explanation": "Format CSV as table"
+      },
+      {
+        "command": "mount | column -t",
+        "explanation": "Format mount output nicely"
+      }
+    ],
+    "tips": [
+      "Great for making readable tables",
+      "Use -t for automatic formatting",
+      "Aligns columns nicely"
+    ]
+  },
+  
+  "fmt": {
+    "description": "Simple optimal text formatter",
+    "usage": "fmt [OPTIONS] [FILE]",
+    "category": "text_processing",
+    "tags": ["format", "wrap", "text", "reflow"],
+    "common_options": {
+      "-w": "Width (default 75)",
+      "-u": "Uniform spacing"
+    },
+    "examples": [
+      {
+        "command": "fmt -w 60 file.txt",
+        "explanation": "Reflow text to 60 columns"
+      },
+      {
+        "command": "echo 'long line' | fmt",
+        "explanation": "Format with default width"
+      }
+    ],
+    "tips": [
+      "Good for reformatting paragraphs",
+      "Preserves blank lines",
+      "Use for email formatting"
+    ]
+  },
+  
+  "fold": {
+    "description": "Wrap each line to specified width",
+    "usage": "fold [OPTIONS] [FILE]",
+    "category": "text_processing",
+    "tags": ["wrap", "width", "text", "line"],
+    "common_options": {
+      "-w": "Width (default 80)",
+      "-s": "Break at spaces",
+      "-b": "Count bytes not columns"
+    },
+    "examples": [
+      {
+        "command": "fold -w 40 file.txt",
+        "explanation": "Wrap lines at 40 characters"
+      },
+      {
+        "command": "fold -s -w 60 file.txt",
+        "explanation": "Wrap at spaces, 60 width"
+      }
+    ],
+    "tips": [
+      "Unlike fmt, breaks mid-word unless -s",
+      "Good for fixed-width output",
+      "Use -s to break at spaces"
+    ]
+  },
+  
+  "expand": {
+    "description": "Convert tabs to spaces",
+    "usage": "expand [OPTIONS] [FILE]",
+    "category": "text_processing",
+    "tags": ["tabs", "spaces", "convert", "whitespace"],
+    "common_options": {
+      "-t": "Tab stops (default 8)",
+      "-i": "Only initial tabs"
+    },
+    "examples": [
+      {
+        "command": "expand file.txt",
+        "explanation": "Convert tabs to spaces"
+      },
+      {
+        "command": "expand -t 4 file.txt",
+        "explanation": "Use 4-space tabs"
+      }
+    ],
+    "tips": [
+      "Default is 8 spaces per tab",
+      "Use unexpand to reverse",
+      "Good for code formatting"
+    ]
+  },
+  
+  "unexpand": {
+    "description": "Convert spaces to tabs",
+    "usage": "unexpand [OPTIONS] [FILE]",
+    "category": "text_processing",
+    "tags": ["spaces", "tabs", "convert", "whitespace"],
+    "common_options": {
+      "-t": "Tab stops",
+      "-a": "All spaces (not just initial)"
+    },
+    "examples": [
+      {
+        "command": "unexpand file.txt",
+        "explanation": "Convert initial spaces to tabs"
+      },
+      {
+        "command": "unexpand -a file.txt",
+        "explanation": "Convert all spaces to tabs"
+      }
+    ],
+    "tips": [
+      "Opposite of expand",
+      "Default converts only leading spaces",
+      "Use -a for all spaces"
+    ]
+  },
+  
+  "strings": {
+    "description": "Print printable strings in files",
+    "usage": "strings [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["binary", "text", "extract", "debug"],
+    "common_options": {
+      "-n": "Minimum length (default 4)",
+      "-a": "Scan whole file",
+      "-t": "Show offset"
+    },
+    "examples": [
+      {
+        "command": "strings binary_file",
+        "explanation": "Extract text from binary"
+      },
+      {
+        "command": "strings -n 10 binary",
+        "explanation": "Find strings 10+ chars"
+      },
+      {
+        "command": "strings /bin/ls | grep -i version",
+        "explanation": "Find version info"
+      }
+    ],
+    "tips": [
+      "Great for binary analysis",
+      "Find hidden text in files",
+      "Use with grep for searching"
+    ]
+  },
+  
+  "hexdump": {
+    "description": "Display file in hexadecimal",
+    "usage": "hexdump [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["hex", "binary", "dump", "debug"],
+    "common_options": {
+      "-C": "Canonical hex+ASCII",
+      "-n": "Length to read",
+      "-s": "Skip offset"
+    },
+    "examples": [
+      {
+        "command": "hexdump -C file.bin",
+        "explanation": "Hex dump with ASCII"
+      },
+      {
+        "command": "hexdump -n 100 file",
+        "explanation": "First 100 bytes only"
+      }
+    ],
+    "tips": [
+      "Use -C for readable format",
+      "xxd is similar",
+      "Good for binary inspection"
+    ]
+  },
+  
+  "xxd": {
+    "description": "Make hexdump or reverse",
+    "usage": "xxd [OPTIONS] [FILE]",
+    "category": "file_operations",
+    "tags": ["hex", "binary", "dump", "reverse"],
+    "common_options": {
+      "-r": "Reverse (hex to binary)",
+      "-p": "Plain hex",
+      "-l": "Length",
+      "-s": "Start offset"
+    },
+    "examples": [
+      {
+        "command": "xxd file.bin",
+        "explanation": "Hexdump"
+      },
+      {
+        "command": "xxd -p file.bin",
+        "explanation": "Plain hex output"
+      },
+      {
+        "command": "xxd -r dump.hex output.bin",
+        "explanation": "Convert hex to binary"
+      }
+    ],
+    "tips": [
+      "Can reverse hex to binary",
+      "Cleaner than hexdump",
+      "Ships with vim"
+    ]
+  },
+  
+  "od": {
+    "description": "Dump files in octal and other formats",
+    "usage": "od [OPTIONS] [FILE]",
+    "category": "file_operations",
+    "tags": ["octal", "hex", "dump", "binary"],
+    "common_options": {
+      "-x": "Hexadecimal",
+      "-c": "ASCII characters",
+      "-A": "Address radix",
+      "-N": "Limit bytes"
+    },
+    "examples": [
+      {
+        "command": "od -c file.txt",
+        "explanation": "Show characters"
+      },
+      {
+        "command": "od -x file.bin",
+        "explanation": "Hexadecimal dump"
+      }
+    ],
+    "tips": [
+      "POSIX standard tool",
+      "Multiple output formats",
+      "Use hexdump/xxd for hex"
+    ]
+  },
+  
+  "split": {
+    "description": "Split file into pieces",
+    "usage": "split [OPTIONS] FILE [PREFIX]",
+    "category": "file_operations",
+    "tags": ["split", "divide", "chunk", "parts"],
+    "common_options": {
+      "-b": "Split by bytes",
+      "-l": "Split by lines",
+      "-n": "Number of chunks",
+      "-d": "Numeric suffix"
+    },
+    "examples": [
+      {
+        "command": "split -l 1000 large.txt part_",
+        "explanation": "Split into 1000-line files"
+      },
+      {
+        "command": "split -b 1M video.mp4 chunk_",
+        "explanation": "Split into 1MB chunks"
+      },
+      {
+        "command": "split -n 5 file.txt",
+        "explanation": "Split into 5 equal parts"
+      }
+    ],
+    "tips": [
+      "Use cat to rejoin: cat part_* > original",
+      "Default suffix is aa, ab, ac...",
+      "Use -d for numeric suffixes"
+    ]
+  },
+  
+  "csplit": {
+    "description": "Split file into sections by context",
+    "usage": "csplit FILE PATTERN",
+    "category": "file_operations",
+    "tags": ["split", "pattern", "context", "sections"],
+    "common_options": {
+      "-f": "Output prefix",
+      "-k": "Keep files on error",
+      "-n": "Suffix digits"
+    },
+    "examples": [
+      {
+        "command": "csplit file.txt '/^Chapter/' '{*}'",
+        "explanation": "Split at each 'Chapter' line"
+      },
+      {
+        "command": "csplit log.txt '%ERROR%' '/WARNING/' '{*}'",
+        "explanation": "Complex pattern splitting"
+      }
+    ],
+    "tips": [
+      "Context-aware splitting",
+      "Uses regex patterns",
+      "More powerful than split"
+    ]
+  },
+  
+  "gzip": {
+    "description": "Compress files",
+    "usage": "gzip [OPTIONS] [FILE]",
+    "category": "file_operations",
+    "tags": ["compress", "zip", "archive", "gz"],
+    "common_options": {
+      "-d": "Decompress (same as gunzip)",
+      "-c": "Write to stdout",
+      "-k": "Keep original file",
+      "-9": "Best compression",
+      "-1": "Fast compression"
+    },
+    "examples": [
+      {
+        "command": "gzip file.txt",
+        "explanation": "Compress to file.txt.gz"
+      },
+      {
+        "command": "gzip -k file.txt",
+        "explanation": "Compress, keep original"
+      },
+      {
+        "command": "gzip -d file.txt.gz",
+        "explanation": "Decompress"
+      }
+    ],
+    "tips": [
+      "Replaces file by default",
+      "Use -k to keep original",
+      "gunzip is same as gzip -d"
+    ]
+  },
+  
+  "gunzip": {
+    "description": "Decompress gzip files",
+    "usage": "gunzip [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["decompress", "unzip", "extract", "gz"],
+    "common_options": {
+      "-c": "Write to stdout",
+      "-k": "Keep original",
+      "-f": "Force overwrite"
+    },
+    "examples": [
+      {
+        "command": "gunzip file.txt.gz",
+        "explanation": "Decompress file"
+      },
+      {
+        "command": "gunzip -c file.gz | less",
+        "explanation": "View without extracting"
+      }
+    ],
+    "tips": [
+      "Same as gzip -d",
+      "Removes .gz extension",
+      "Use zcat to view"
+    ]
+  },
+  
+  "bzip2": {
+    "description": "Compress files with bzip2 algorithm",
+    "usage": "bzip2 [OPTIONS] [FILE]",
+    "category": "file_operations",
+    "tags": ["compress", "bz2", "archive"],
+    "common_options": {
+      "-d": "Decompress",
+      "-k": "Keep original",
+      "-z": "Force compression",
+      "-9": "Best compression (default)"
+    },
+    "examples": [
+      {
+        "command": "bzip2 file.txt",
+        "explanation": "Compress to file.txt.bz2"
+      },
+      {
+        "command": "bzip2 -d file.txt.bz2",
+        "explanation": "Decompress"
+      }
+    ],
+    "tips": [
+      "Better compression than gzip",
+      "Slower than gzip",
+      "Use bunzip2 to decompress"
+    ]
+  },
+  
+  "bunzip2": {
+    "description": "Decompress bzip2 files",
+    "usage": "bunzip2 [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["decompress", "extract", "bz2"],
+    "common_options": {
+      "-k": "Keep original",
+      "-c": "Write to stdout"
+    },
+    "examples": [
+      {
+        "command": "bunzip2 file.txt.bz2",
+        "explanation": "Decompress file"
+      },
+      {
+        "command": "bunzip2 -c file.bz2 | less",
+        "explanation": "View without extracting"
+      }
+    ],
+    "tips": [
+      "Same as bzip2 -d",
+      "Use bzcat to view",
+      "Removes .bz2 extension"
+    ]
+  },
+  
+  "xz": {
+    "description": "Compress files with xz algorithm",
+    "usage": "xz [OPTIONS] [FILE]",
+    "category": "file_operations",
+    "tags": ["compress", "xz", "lzma", "archive"],
+    "common_options": {
+      "-d": "Decompress",
+      "-k": "Keep original",
+      "-z": "Force compression",
+      "-9": "Best compression"
+    },
+    "examples": [
+      {
+        "command": "xz file.txt",
+        "explanation": "Compress to file.txt.xz"
+      },
+      {
+        "command": "xz -d file.txt.xz",
+        "explanation": "Decompress"
+      },
+      {
+        "command": "xz -k -9 large.tar",
+        "explanation": "Best compression, keep original"
+      }
+    ],
+    "tips": [
+      "Best compression ratio",
+      "Slower than gzip",
+      "Used in Linux kernel tarballs"
+    ]
+  },
+  
+  "unxz": {
+    "description": "Decompress xz files",
+    "usage": "unxz [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["decompress", "extract", "xz"],
+    "common_options": {
+      "-k": "Keep original",
+      "-c": "Write to stdout"
+    },
+    "examples": [
+      {
+        "command": "unxz file.txt.xz",
+        "explanation": "Decompress file"
+      },
+      {
+        "command": "unxz -c file.xz | grep pattern",
+        "explanation": "Search without extracting"
+      }
+    ],
+    "tips": [
+      "Same as xz -d",
+      "Use xzcat to view",
+      "Removes .xz extension"
+    ]
+  },
+  
+  "zcat": {
+    "description": "View compressed gzip files",
+    "usage": "zcat [FILE]",
+    "category": "file_operations",
+    "tags": ["view", "cat", "gz", "compressed"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "zcat file.txt.gz",
+        "explanation": "View gzipped file"
+      },
+      {
+        "command": "zcat file.gz | grep pattern",
+        "explanation": "Search in compressed file"
+      },
+      {
+        "command": "zcat *.gz | less",
+        "explanation": "View multiple compressed files"
+      }
+    ],
+    "tips": [
+      "Doesn't extract file",
+      "Same as gunzip -c",
+      "Can pipe to other commands"
+    ]
+  },
+  
+  "bzcat": {
+    "description": "View compressed bzip2 files",
+    "usage": "bzcat [FILE]",
+    "category": "file_operations",
+    "tags": ["view", "cat", "bz2", "compressed"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "bzcat file.txt.bz2",
+        "explanation": "View bz2 file"
+      },
+      {
+        "command": "bzcat log.bz2 | grep ERROR",
+        "explanation": "Search compressed log"
+      }
+    ],
+    "tips": [
+      "Same as bunzip2 -c",
+      "Doesn't extract",
+      "Good for log files"
+    ]
+  },
+  
+  "xzcat": {
+    "description": "View compressed xz files",
+    "usage": "xzcat [FILE]",
+    "category": "file_operations",
+    "tags": ["view", "cat", "xz", "compressed"],
+    "common_options": {},
+    "examples": [
+      {
+        "command": "xzcat file.txt.xz",
+        "explanation": "View xz file"
+      },
+      {
+        "command": "xzcat archive.tar.xz | tar t",
+        "explanation": "List archive contents"
+      }
+    ],
+    "tips": [
+      "Same as unxz -c",
+      "Fast viewing",
+      "Pipe friendly"
+    ]
   }
 }
