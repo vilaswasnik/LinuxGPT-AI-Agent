@@ -1,6 +1,6 @@
-╔═══════════════════════════════════════════════════════════════════════════════╗
-║                    LINUX COMMAND AGENT - SYSTEM OVERVIEW                      ║
-╚═══════════════════════════════════════════════════════════════════════════════╝
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                          LINUXGPT - SYSTEM OVERVIEW                           ║
+╚════════════════════════════════════════════════════════════════════════════════╝
 
 ┌───────────────────────────────────────────────────────────────────────────────┐
 │                              PROJECT STRUCTURE                                │
@@ -10,7 +10,7 @@
 │   │                                                                           │
 │   ├── 📄 agent.py                    [12KB] Main agent implementation        │
 │   │   └── Classes:                                                           │
-│   │       • LinuxCommandAgent       - Core orchestrator                      │
+│   │       • LinuxGPT                - Core orchestrator                      │
 │   │       • LinuxCommandDatabase    - Command knowledge base                 │
 │   │       • LLMInterface            - OpenAI API wrapper                     │
 │   │       • CommandResult           - Execution results                      │

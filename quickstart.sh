@@ -1,9 +1,9 @@
 #!/bin/bash
-# Quick Start Script for Linux Command Agent
+# Quick Start Script for LinuxGPT
 
-echo "╔════════════════════════════════════════════════════════════════╗"
-echo "║        Linux Command Agent - Quick Start                       ║"
-echo "╚════════════════════════════════════════════════════════════════╝"
+echo "╔═════════════════════════════════════════════════════════════════╗"
+echo "║                   LinuxGPT - Quick Start                       ║"
+echo "╚═════════════════════════════════════════════════════════════════╝"
 echo ""
 
 # Check if Python is available

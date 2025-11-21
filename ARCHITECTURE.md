@@ -13,7 +13,7 @@
                          │
                          v
 ┌─────────────────────────────────────────────────────────────────┐
-│                    LINUX COMMAND AGENT                          │
+│                         LINUXGPT                                │
 │                      (agent.py)                                 │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐ │
@@ -143,7 +143,7 @@ User Output
 
 ## Key Classes
 
-### LinuxCommandAgent
+### LinuxGPT
 - Main orchestrator
 - Manages query → command → execution flow
 - Maintains command history

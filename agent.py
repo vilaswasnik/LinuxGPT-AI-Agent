@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Linux Command Agent - Natural Language to Linux Command System
+LinuxGPT - Natural Language to Linux Command System
 
 This agent converts natural language queries into appropriate Linux commands,
 executes them, and returns the results. It uses an LLM for reasoning and 
@@ -260,7 +260,7 @@ class LLMInterface:
             return "echo 'Query not recognized. Try: show files, disk space, memory, processes, find large files, etc.'"
 
 
-class LinuxCommandAgent:
+class LinuxGPT:
     """Main agent that processes queries and executes commands"""
     
     def __init__(self, db_file: str = "linux_commands_db.json", educational_mode: bool = True):
@@ -456,7 +456,7 @@ def main():
         print("   Set OPENAI_API_KEY environment variable for full functionality.")
         print()
     
-    agent = LinuxCommandAgent()
+    agent = LinuxGPT()
     
     # Interactive mode
     if len(sys.argv) > 1:

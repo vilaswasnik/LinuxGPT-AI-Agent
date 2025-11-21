@@ -1,6 +1,6 @@
 {
   "agent": {
-    "name": "Linux Command Agent",
+    "name": "LinuxGPT",
     "version": "1.0.0",
     "description": "Natural Language to Linux Command System"
   },

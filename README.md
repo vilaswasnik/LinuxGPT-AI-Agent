@@ -1,4 +1,4 @@
-# Linux Command Agent
+# LinuxGPT
 
 A natural language interface for Linux commands powered by LLMs. This system converts natural language queries into appropriate Linux commands, executes them safely, and returns the results.
 

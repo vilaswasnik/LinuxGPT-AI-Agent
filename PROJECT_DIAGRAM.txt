@@ -1,5 +1,5 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║                    LINUX COMMAND AGENT - SYSTEM ARCHITECTURE                 ║
+║                         LINUXGPT - SYSTEM ARCHITECTURE                       ║
 ║                   Natural Language → Linux Command Converter                 ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -13,7 +13,7 @@
                                       │
                                       ▼
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║                          LINUX COMMAND AGENT (agent.py)                      ║
+║                              LINUXGPT (agent.py)                             ║
 ║ ┌──────────────────────────────────────────────────────────────────────────┐ ║
 ║ │  Main Processing Flow:                                                   │ ║
 ║ │  1. Receive query                                                        │ ║

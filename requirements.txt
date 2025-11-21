@@ -1,4 +1,4 @@
-# Core requirements for Linux Command Agent
+# Core requirements for LinuxGPT
 openai>=1.0.0
 python-dotenv>=0.19.0
 

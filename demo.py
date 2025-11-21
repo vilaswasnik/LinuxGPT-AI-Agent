@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test script to demonstrate the Linux Command Agent functionality
+Test script to demonstrate the LinuxGPT functionality
 """
 
 import sys
@@ -9,7 +9,7 @@ import os
 # Add current directory to path to import agent
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from agent import LinuxCommandAgent
+from agent import LinuxGPT
 
 
 def print_section(title):
@@ -48,7 +48,7 @@ def run_test_query(agent, query):
 
 
 def main():
-    print_section("Linux Command Agent - Demo Script")
+    print_section("LinuxGPT - Demo Script")
     
     print("\n🤖 Initializing agent...")
     
@@ -59,7 +59,7 @@ def main():
     else:
         print("✓ OpenAI API key detected - using full LLM mode")
     
-    agent = LinuxCommandAgent()
+    agent = LinuxGPT()
     
     # Test queries covering different categories
     test_queries = [

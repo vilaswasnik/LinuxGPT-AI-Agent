@@ -1,8 +1,8 @@
-# 🎓 Linux Command Agent - Educational Features
+# 🎓 LinuxGPT - Educational Features
 
 ## Overview
 
-The Linux Command Agent now includes **comprehensive educational features** with:
+LinuxGPT now includes **comprehensive educational features** with:
 - **100+ Linux commands** with detailed explanations
 - **30+ command combinations** showing real-world usage
 - **Interactive learning mode** with tips and examples
@@ -320,7 +320,7 @@ The agent automatically loads the comprehensive database if available:
 Enable/disable educational mode:
 
 ```python
-agent = LinuxCommandAgent(educational_mode=True)  # Default
+agent = LinuxGPT(educational_mode=True)  # Default
 ```
 
 ---
