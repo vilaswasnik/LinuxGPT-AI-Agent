@@ -229,6 +229,8 @@
 │  • ls, cat, cp, mv       • df, du, lsblk         • grep, find, locate       │
 │  • rm, touch, chmod      • fdisk, parted         • awk, sed, cut            │
 │  • mkdir, rmdir          • mkfs, blkid           • wc, sort, uniq           │
+│  • less, more, head      • resize2fs, tune2fs    •                          │
+│                          • dumpe2fs              •                          │
 │                                                                              │
 │  ⚙️  System Info          🌐 Network              📦 Archives               │
 │  ──────────────          ─────────               ─────────                  │
@@ -236,15 +238,30 @@
 │  • free, uptime          • curl, wget            • unzip, bzip2             │
 │  • uname, hostname       • ss, ip, ifconfig      • 7z, xz                   │
 │  • vmstat, iostat        • lsof (ports)          •                          │
+│  • lscpu, dmidecode      • ethtool, traceroute   •                          │
+│  • lshw, pstree          •                       •                          │
 │                                                                              │
 │  👤 User Management      📊 Performance          📝 Logs                     │
 │  ─────────────────       ─────────────           ──────                     │
-│  • whoami, who           • iostat, vmstat        • dmesg, journalctl        │
-│  • useradd, passwd       • sar, mpstat           • tail, head, less         │
-│  • groups, id            • top, htop             • syslog, messages         │
+│  • whoami, who, id       • iostat, vmstat        • dmesg, journalctl        │
+│  • useradd, userdel      • sar, pidstat          • tail, head, less         │
+│  • usermod, passwd       • top, htop             • syslog, messages         │
+│  • su, groups            •                       •                          │
+│                                                                              │
+│  💿 LVM Management       📦 Package Mgmt         🔧 Hardware                │
+│  ────────────────        ─────────────           ──────────                 │
+│  • vgs, vgcreate         • yum, rpm (RHEL)       • lspci, lsusb             │
+│  • vgextend, vgdisplay   • apt-get, dpkg (Deb)   • hdparm, lsdev            │
+│  • lvs, lvcreate         • systemctl             •                          │
+│  • lvextend, lvdisplay   •                       •                          │
+│                                                                              │
+│  🔄 Memory & Swap        🎯 Special              📊 Tuning                  │
+│  ───────────────         ─────────               ────────                   │
+│  • swapon, mkswap        • cron, at              • sysctl                   │
+│  • swapoff, free         • screen, tmux          •                          │
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 
          ╔════════════════════════════════════════════════════════╗
-         ║  Total: 60+ Commands | 30+ Combinations | 200+ Examples ║
+         ║  Total: 110+ Commands | 30+ Combinations | 350+ Examples ║
          ╚════════════════════════════════════════════════════════╝

@@ -1568,5 +1568,1199 @@
       "Common tuning: net.ipv4.ip_forward, vm.swappiness",
       "Reload config: sysctl -p"
     ]
+  },
+  
+  "lscpu": {
+    "description": "Display CPU architecture information",
+    "usage": "lscpu [OPTIONS]",
+    "category": "system_info",
+    "tags": ["cpu", "processor", "hardware", "architecture"],
+    "common_options": {
+      "-e": "Extended readable format",
+      "-p": "Parsable format",
+      "-J": "JSON output"
+    },
+    "examples": [
+      {
+        "command": "lscpu",
+        "explanation": "Show CPU architecture details"
+      },
+      {
+        "command": "lscpu | grep -i mhz",
+        "explanation": "Show CPU frequency"
+      },
+      {
+        "command": "lscpu -J",
+        "explanation": "Output in JSON format"
+      }
+    ],
+    "tips": [
+      "Shows cores, threads, cache sizes",
+      "Useful for capacity planning",
+      "Part of util-linux package"
+    ]
+  },
+  
+  "dmidecode": {
+    "description": "DMI/SMBIOS table decoder - hardware information",
+    "usage": "dmidecode [OPTIONS]",
+    "category": "system_info",
+    "tags": ["hardware", "bios", "system", "dmi"],
+    "common_options": {
+      "-t": "Type (bios, system, baseboard, processor, memory)",
+      "-s": "String (system-serial-number, system-uuid, etc.)",
+      "-q": "Less verbose output"
+    },
+    "examples": [
+      {
+        "command": "sudo dmidecode -t memory",
+        "explanation": "Show memory information"
+      },
+      {
+        "command": "sudo dmidecode -t processor",
+        "explanation": "Show CPU information"
+      },
+      {
+        "command": "sudo dmidecode -s system-serial-number",
+        "explanation": "Show system serial number"
+      }
+    ],
+    "tips": [
+      "Requires root privileges",
+      "Useful for hardware inventory",
+      "Works on x86/x86_64 systems with SMBIOS"
+    ]
+  },
+  
+  "lshw": {
+    "description": "List hardware configuration",
+    "usage": "lshw [OPTIONS]",
+    "category": "system_info",
+    "tags": ["hardware", "system", "devices"],
+    "common_options": {
+      "-short": "Short format output",
+      "-html": "HTML output format",
+      "-class": "Show specific hardware class"
+    },
+    "examples": [
+      {
+        "command": "sudo lshw -short",
+        "explanation": "Show hardware summary"
+      },
+      {
+        "command": "sudo lshw -class disk",
+        "explanation": "Show disk information"
+      },
+      {
+        "command": "sudo lshw -class network",
+        "explanation": "Show network devices"
+      }
+    ],
+    "tips": [
+      "Requires root for complete information",
+      "Can output in various formats (xml, json, html)",
+      "Install: apt install lshw or yum install lshw"
+    ]
+  },
+  
+  "resize2fs": {
+    "description": "Resize ext2/ext3/ext4 file systems",
+    "usage": "resize2fs DEVICE [SIZE]",
+    "category": "disk_management",
+    "tags": ["filesystem", "resize", "ext4", "partition"],
+    "common_options": {
+      "-p": "Print progress bar",
+      "-f": "Force resize",
+      "-M": "Shrink to minimum size"
+    },
+    "examples": [
+      {
+        "command": "sudo resize2fs /dev/sda1",
+        "explanation": "Resize to fill available space"
+      },
+      {
+        "command": "sudo resize2fs /dev/sda1 10G",
+        "explanation": "Resize to 10GB"
+      },
+      {
+        "command": "sudo resize2fs -M /dev/sda1",
+        "explanation": "Shrink to minimum size"
+      }
+    ],
+    "tips": [
+      "Run fsck before shrinking",
+      "Unmount filesystem before shrinking",
+      "Can expand online (while mounted)"
+    ]
+  },
+  
+  "tune2fs": {
+    "description": "Adjust tunable filesystem parameters on ext2/ext3/ext4",
+    "usage": "tune2fs [OPTIONS] DEVICE",
+    "category": "disk_management",
+    "tags": ["filesystem", "tuning", "ext4", "parameters"],
+    "common_options": {
+      "-l": "List filesystem parameters",
+      "-L": "Set volume label",
+      "-c": "Set mount count check interval",
+      "-m": "Set reserved blocks percentage"
+    },
+    "examples": [
+      {
+        "command": "sudo tune2fs -l /dev/sda1",
+        "explanation": "Show filesystem info"
+      },
+      {
+        "command": "sudo tune2fs -L MyDisk /dev/sda1",
+        "explanation": "Set volume label"
+      },
+      {
+        "command": "sudo tune2fs -m 1 /dev/sda1",
+        "explanation": "Set 1% reserved blocks"
+      }
+    ],
+    "tips": [
+      "Can modify mounted filesystem safely",
+      "Check mount count: tune2fs -l | grep Mount",
+      "Disable fsck count check: tune2fs -c 0"
+    ]
+  },
+  
+  "dumpe2fs": {
+    "description": "Dump ext2/ext3/ext4 filesystem information",
+    "usage": "dumpe2fs [OPTIONS] DEVICE",
+    "category": "disk_management",
+    "tags": ["filesystem", "info", "ext4", "diagnostic"],
+    "common_options": {
+      "-h": "Only show superblock information",
+      "-b": "Show reserved blocks",
+      "-f": "Force display even if errors"
+    },
+    "examples": [
+      {
+        "command": "sudo dumpe2fs /dev/sda1 | grep -i block",
+        "explanation": "Show block information"
+      },
+      {
+        "command": "sudo dumpe2fs -h /dev/sda1",
+        "explanation": "Show superblock only"
+      }
+    ],
+    "tips": [
+      "Useful for filesystem troubleshooting",
+      "Shows detailed inode and block info",
+      "Combine with grep for specific data"
+    ]
+  },
+  
+  "pstree": {
+    "description": "Display processes in tree format",
+    "usage": "pstree [OPTIONS] [PID|USER]",
+    "category": "process_management",
+    "tags": ["process", "tree", "hierarchy", "parent"],
+    "common_options": {
+      "-p": "Show PIDs",
+      "-a": "Show command line arguments",
+      "-u": "Show user transitions",
+      "-h": "Highlight current process"
+    },
+    "examples": [
+      {
+        "command": "pstree",
+        "explanation": "Show all processes in tree"
+      },
+      {
+        "command": "pstree -p",
+        "explanation": "Show with PIDs"
+      },
+      {
+        "command": "pstree username",
+        "explanation": "Show processes for specific user"
+      }
+    ],
+    "tips": [
+      "Great for understanding process relationships",
+      "Use with -p to see PIDs for killing",
+      "Install: apt install psmisc"
+    ]
+  },
+  
+  "pidstat": {
+    "description": "Report statistics for Linux tasks (processes)",
+    "usage": "pidstat [OPTIONS] [INTERVAL] [COUNT]",
+    "category": "process_management",
+    "tags": ["process", "statistics", "performance", "monitor"],
+    "common_options": {
+      "-u": "CPU statistics",
+      "-r": "Memory statistics",
+      "-d": "I/O statistics",
+      "-p": "Monitor specific PID"
+    },
+    "examples": [
+      {
+        "command": "pidstat 1 5",
+        "explanation": "CPU stats every 1 sec, 5 times"
+      },
+      {
+        "command": "pidstat -r 2",
+        "explanation": "Memory stats every 2 seconds"
+      },
+      {
+        "command": "pidstat -p 1234",
+        "explanation": "Stats for specific process"
+      }
+    ],
+    "tips": [
+      "Part of sysstat package",
+      "Use -d for disk I/O per process",
+      "Combine with -h for human-readable"
+    ]
+  },
+  
+  "sar": {
+    "description": "Collect, report, or save system activity information",
+    "usage": "sar [OPTIONS] [INTERVAL] [COUNT]",
+    "category": "system_info",
+    "tags": ["performance", "monitoring", "statistics", "cpu", "memory"],
+    "common_options": {
+      "-u": "CPU utilization",
+      "-r": "Memory utilization",
+      "-n": "Network statistics",
+      "-d": "Disk activity",
+      "-q": "Queue length and load averages"
+    },
+    "examples": [
+      {
+        "command": "sar -u 1 5",
+        "explanation": "CPU usage every 1 sec, 5 times"
+      },
+      {
+        "command": "sar -r 2 3",
+        "explanation": "Memory stats every 2 secs, 3 times"
+      },
+      {
+        "command": "sar -n DEV 1 5",
+        "explanation": "Network interface stats"
+      }
+    ],
+    "tips": [
+      "Part of sysstat package",
+      "Logs to /var/log/sa/ directory",
+      "View historical data: sar -f /var/log/sa/sa10"
+    ]
+  },
+  
+  "htop": {
+    "description": "Interactive process viewer (improved top)",
+    "usage": "htop [OPTIONS]",
+    "category": "process_management",
+    "tags": ["process", "monitor", "interactive", "cpu", "memory"],
+    "common_options": {
+      "-u": "Show only user's processes",
+      "-p": "Show only given PIDs",
+      "-s": "Sort by column",
+      "-t": "Tree view"
+    },
+    "examples": [
+      {
+        "command": "htop",
+        "explanation": "Launch interactive monitor"
+      },
+      {
+        "command": "htop -u username",
+        "explanation": "Show only user's processes"
+      },
+      {
+        "command": "htop -t",
+        "explanation": "Start in tree view mode"
+      }
+    ],
+    "tips": [
+      "F9 to kill processes, F6 to sort",
+      "Space to tag, U to untag all",
+      "Install: apt install htop"
+    ]
+  },
+  
+  "swapon": {
+    "description": "Enable swap space",
+    "usage": "swapon [OPTIONS] [DEVICE]",
+    "category": "system_info",
+    "tags": ["swap", "memory", "paging"],
+    "common_options": {
+      "-s": "Display swap usage summary",
+      "-a": "Enable all swaps in /etc/fstab",
+      "-p": "Set priority"
+    },
+    "examples": [
+      {
+        "command": "swapon -s",
+        "explanation": "Show swap usage"
+      },
+      {
+        "command": "sudo swapon /dev/sdb1",
+        "explanation": "Enable swap on device"
+      },
+      {
+        "command": "sudo swapon -a",
+        "explanation": "Enable all swaps from fstab"
+      }
+    ],
+    "tips": [
+      "Check swap: swapon -s or free -h",
+      "Set priority with -p for multiple swaps",
+      "Add to /etc/fstab for permanent"
+    ]
+  },
+  
+  "mkswap": {
+    "description": "Set up a Linux swap area",
+    "usage": "mkswap [OPTIONS] DEVICE",
+    "category": "system_info",
+    "tags": ["swap", "create", "memory", "partition"],
+    "common_options": {
+      "-L": "Set label",
+      "-U": "Set UUID",
+      "-c": "Check for bad blocks"
+    },
+    "examples": [
+      {
+        "command": "sudo mkswap /dev/sdb1",
+        "explanation": "Create swap on partition"
+      },
+      {
+        "command": "sudo mkswap -L myswap /dev/sdb1",
+        "explanation": "Create swap with label"
+      }
+    ],
+    "tips": [
+      "Run mkswap before swapon",
+      "⚠️ Destroys data on partition",
+      "Follow with: swapon /dev/sdb1"
+    ]
+  },
+  
+  "swapoff": {
+    "description": "Disable swap space",
+    "usage": "swapoff [OPTIONS] [DEVICE]",
+    "category": "system_info",
+    "tags": ["swap", "memory", "disable"],
+    "common_options": {
+      "-a": "Disable all swaps",
+      "-v": "Verbose output"
+    },
+    "examples": [
+      {
+        "command": "sudo swapoff /dev/sdb1",
+        "explanation": "Disable specific swap"
+      },
+      {
+        "command": "sudo swapoff -a",
+        "explanation": "Disable all swap spaces"
+      }
+    ],
+    "tips": [
+      "Use before removing swap device",
+      "May take time if swap is in use",
+      "Check with: free -h"
+    ]
+  },
+  
+  "useradd": {
+    "description": "Create a new user account",
+    "usage": "useradd [OPTIONS] USERNAME",
+    "category": "user_management",
+    "tags": ["user", "create", "account", "admin"],
+    "common_options": {
+      "-m": "Create home directory",
+      "-s": "Set login shell",
+      "-G": "Add to supplementary groups",
+      "-u": "Set specific UID",
+      "-c": "Add comment (full name)"
+    },
+    "examples": [
+      {
+        "command": "sudo useradd -m john",
+        "explanation": "Create user with home directory"
+      },
+      {
+        "command": "sudo useradd -m -s /bin/bash -G sudo john",
+        "explanation": "Create user with bash shell and sudo access"
+      },
+      {
+        "command": "sudo useradd -m -c \"John Doe\" john",
+        "explanation": "Create user with full name"
+      }
+    ],
+    "tips": [
+      "Set password: passwd username",
+      "Use -m to auto-create home directory",
+      "Default shell is usually /bin/sh"
+    ]
+  },
+  
+  "userdel": {
+    "description": "Delete a user account",
+    "usage": "userdel [OPTIONS] USERNAME",
+    "category": "user_management",
+    "tags": ["user", "delete", "remove", "account"],
+    "common_options": {
+      "-r": "Remove home directory and mail spool",
+      "-f": "Force removal"
+    },
+    "examples": [
+      {
+        "command": "sudo userdel john",
+        "explanation": "Delete user (keep home directory)"
+      },
+      {
+        "command": "sudo userdel -r john",
+        "explanation": "Delete user and home directory"
+      }
+    ],
+    "tips": [
+      "⚠️ Use -r to remove home directory",
+      "Check for running processes first: ps -u john",
+      "Backup important data before deletion"
+    ]
+  },
+  
+  "usermod": {
+    "description": "Modify a user account",
+    "usage": "usermod [OPTIONS] USERNAME",
+    "category": "user_management",
+    "tags": ["user", "modify", "edit", "account"],
+    "common_options": {
+      "-G": "Set supplementary groups",
+      "-aG": "Append to groups",
+      "-s": "Change shell",
+      "-L": "Lock account",
+      "-U": "Unlock account"
+    },
+    "examples": [
+      {
+        "command": "sudo usermod -aG sudo john",
+        "explanation": "Add user to sudo group"
+      },
+      {
+        "command": "sudo usermod -s /bin/zsh john",
+        "explanation": "Change user's shell"
+      },
+      {
+        "command": "sudo usermod -L john",
+        "explanation": "Lock user account"
+      }
+    ],
+    "tips": [
+      "Use -aG to append groups (not replace)",
+      "Lock account instead of deleting",
+      "Changes take effect on next login"
+    ]
+  },
+  
+  "id": {
+    "description": "Print user and group information",
+    "usage": "id [OPTIONS] [USERNAME]",
+    "category": "user_management",
+    "tags": ["user", "group", "uid", "gid"],
+    "common_options": {
+      "-u": "Print only UID",
+      "-g": "Print only primary GID",
+      "-G": "Print all GIDs",
+      "-n": "Print names instead of numbers"
+    },
+    "examples": [
+      {
+        "command": "id",
+        "explanation": "Show current user info"
+      },
+      {
+        "command": "id john",
+        "explanation": "Show info for specific user"
+      },
+      {
+        "command": "id -u john",
+        "explanation": "Show only UID"
+      }
+    ],
+    "tips": [
+      "Useful for checking group membership",
+      "Combine with -n for readable output",
+      "Check sudo access: id -nG | grep -w sudo"
+    ]
+  },
+  
+  "su": {
+    "description": "Switch user - run command as another user",
+    "usage": "su [OPTIONS] [USERNAME]",
+    "category": "user_management",
+    "tags": ["user", "switch", "sudo", "root"],
+    "common_options": {
+      "-": "Start login shell (load user's environment)",
+      "-c": "Run specific command",
+      "-s": "Specify shell"
+    },
+    "examples": [
+      {
+        "command": "su -",
+        "explanation": "Switch to root with full environment"
+      },
+      {
+        "command": "su - john",
+        "explanation": "Switch to john's account"
+      },
+      {
+        "command": "su -c 'systemctl restart nginx' root",
+        "explanation": "Run command as root"
+      }
+    ],
+    "tips": [
+      "Use 'su -' for full environment",
+      "Prefer sudo over su when possible",
+      "Exit with 'exit' or Ctrl+D"
+    ]
+  },
+  
+  "ethtool": {
+    "description": "Query or control network driver and hardware settings",
+    "usage": "ethtool [OPTIONS] DEVICE",
+    "category": "network",
+    "tags": ["network", "interface", "ethernet", "speed"],
+    "common_options": {
+      "-i": "Show driver information",
+      "-S": "Show statistics",
+      "-s": "Change settings",
+      "-k": "Show offload features"
+    },
+    "examples": [
+      {
+        "command": "ethtool eth0",
+        "explanation": "Show interface settings"
+      },
+      {
+        "command": "ethtool -S eth0",
+        "explanation": "Show interface statistics"
+      },
+      {
+        "command": "ethtool -i eth0",
+        "explanation": "Show driver information"
+      }
+    ],
+    "tips": [
+      "Check link speed and duplex",
+      "Useful for troubleshooting connectivity",
+      "Requires root for changes"
+    ]
+  },
+  
+  "ip": {
+    "description": "Show/manipulate routing, devices, policy routing and tunnels",
+    "usage": "ip [OPTIONS] OBJECT COMMAND",
+    "category": "network",
+    "tags": ["network", "routing", "interface", "address"],
+    "common_options": {
+      "addr": "Manage IP addresses",
+      "link": "Manage network devices",
+      "route": "Manage routing table",
+      "-c": "Use color output"
+    },
+    "examples": [
+      {
+        "command": "ip addr show",
+        "explanation": "Show all IP addresses"
+      },
+      {
+        "command": "ip link set eth0 up",
+        "explanation": "Bring interface up"
+      },
+      {
+        "command": "ip route show",
+        "explanation": "Show routing table"
+      },
+      {
+        "command": "ip addr add 192.168.1.10/24 dev eth0",
+        "explanation": "Add IP address to interface"
+      }
+    ],
+    "tips": [
+      "Modern replacement for ifconfig",
+      "Use 'ip -c' for colored output",
+      "ip addr = ip a (shorthand)"
+    ]
+  },
+  
+  "less": {
+    "description": "View file contents with forward and backward navigation",
+    "usage": "less [OPTIONS] FILE",
+    "category": "file_operations",
+    "tags": ["view", "pager", "read", "scroll"],
+    "common_options": {
+      "-N": "Show line numbers",
+      "-S": "Chop long lines",
+      "-i": "Case-insensitive search",
+      "+F": "Follow mode (like tail -f)"
+    },
+    "examples": [
+      {
+        "command": "less file.txt",
+        "explanation": "View file with navigation"
+      },
+      {
+        "command": "less -N file.txt",
+        "explanation": "View with line numbers"
+      },
+      {
+        "command": "less +F /var/log/syslog",
+        "explanation": "Follow log file in real-time"
+      }
+    ],
+    "tips": [
+      "Press / to search, n for next match",
+      "Press q to quit, Space for next page",
+      "Press G to go to end, g for beginning"
+    ]
+  },
+  
+  "yum": {
+    "description": "Package manager for RPM-based distributions (RHEL, CentOS, Fedora)",
+    "usage": "yum [OPTIONS] COMMAND [PACKAGE]",
+    "category": "package_management",
+    "tags": ["package", "install", "rpm", "yum", "redhat"],
+    "common_options": {
+      "install": "Install package",
+      "remove": "Remove package",
+      "update": "Update packages",
+      "search": "Search for package",
+      "info": "Show package info"
+    },
+    "examples": [
+      {
+        "command": "sudo yum install nginx",
+        "explanation": "Install nginx package"
+      },
+      {
+        "command": "sudo yum update",
+        "explanation": "Update all packages"
+      },
+      {
+        "command": "yum search python",
+        "explanation": "Search for python packages"
+      },
+      {
+        "command": "sudo yum remove package",
+        "explanation": "Remove package"
+      }
+    ],
+    "tips": [
+      "Use -y flag to auto-confirm",
+      "yum history for transaction history",
+      "dnf is the newer yum replacement"
+    ]
+  },
+  
+  "rpm": {
+    "description": "RPM Package Manager - query and manage RPM packages",
+    "usage": "rpm [OPTIONS] [PACKAGE]",
+    "category": "package_management",
+    "tags": ["package", "rpm", "query", "install"],
+    "common_options": {
+      "-qa": "Query all packages",
+      "-qi": "Query package info",
+      "-ql": "List files in package",
+      "-qf": "Find package owning file",
+      "-ivh": "Install with verbose and hash marks"
+    },
+    "examples": [
+      {
+        "command": "rpm -qa",
+        "explanation": "List all installed packages"
+      },
+      {
+        "command": "rpm -qi package",
+        "explanation": "Show package information"
+      },
+      {
+        "command": "rpm -ql package",
+        "explanation": "List files in package"
+      },
+      {
+        "command": "rpm -qf /usr/bin/ls",
+        "explanation": "Find which package owns file"
+      }
+    ],
+    "tips": [
+      "Use with grep: rpm -qa | grep python",
+      "Verify package: rpm -V package",
+      "Prefer yum/dnf over direct rpm"
+    ]
+  },
+  
+  "apt-get": {
+    "description": "APT package handling utility for Debian/Ubuntu",
+    "usage": "apt-get [OPTIONS] COMMAND [PACKAGE]",
+    "category": "package_management",
+    "tags": ["package", "install", "debian", "ubuntu", "apt"],
+    "common_options": {
+      "install": "Install package",
+      "remove": "Remove package",
+      "update": "Update package lists",
+      "upgrade": "Upgrade packages",
+      "autoremove": "Remove unused packages"
+    },
+    "examples": [
+      {
+        "command": "sudo apt-get update",
+        "explanation": "Update package lists"
+      },
+      {
+        "command": "sudo apt-get install nginx",
+        "explanation": "Install nginx package"
+      },
+      {
+        "command": "sudo apt-get upgrade",
+        "explanation": "Upgrade all packages"
+      },
+      {
+        "command": "sudo apt-get autoremove",
+        "explanation": "Remove unused dependencies"
+      }
+    ],
+    "tips": [
+      "Always update before install",
+      "Use apt instead of apt-get (newer)",
+      "apt search for finding packages"
+    ]
+  },
+  
+  "dpkg": {
+    "description": "Debian package manager - low-level package tool",
+    "usage": "dpkg [OPTIONS] [PACKAGE.deb]",
+    "category": "package_management",
+    "tags": ["package", "debian", "ubuntu", "deb"],
+    "common_options": {
+      "-i": "Install package",
+      "-r": "Remove package",
+      "-l": "List packages",
+      "-L": "List files in package",
+      "-S": "Find package owning file"
+    },
+    "examples": [
+      {
+        "command": "dpkg -l",
+        "explanation": "List all installed packages"
+      },
+      {
+        "command": "sudo dpkg -i package.deb",
+        "explanation": "Install .deb package"
+      },
+      {
+        "command": "dpkg -L package",
+        "explanation": "List files in package"
+      },
+      {
+        "command": "dpkg -S /usr/bin/ls",
+        "explanation": "Find which package owns file"
+      }
+    ],
+    "tips": [
+      "Use with grep: dpkg -l | grep python",
+      "Prefer apt-get over direct dpkg",
+      "Fix broken: dpkg --configure -a"
+    ]
+  },
+  
+  "vgs": {
+    "description": "Display volume group information (LVM)",
+    "usage": "vgs [OPTIONS] [VG_NAME]",
+    "category": "disk_management",
+    "tags": ["lvm", "volume", "storage", "vg"],
+    "common_options": {
+      "-o": "Specify output columns",
+      "-a": "Show all information",
+      "-v": "Verbose output"
+    },
+    "examples": [
+      {
+        "command": "vgs",
+        "explanation": "List all volume groups"
+      },
+      {
+        "command": "vgs -o +pv_count",
+        "explanation": "Show with PV count column"
+      }
+    ],
+    "tips": [
+      "Part of LVM2 package",
+      "Shows VG size, free space, PV count",
+      "Use vgdisplay for detailed info"
+    ]
+  },
+  
+  "vgcreate": {
+    "description": "Create a volume group (LVM)",
+    "usage": "vgcreate [OPTIONS] VG_NAME PV_PATH",
+    "category": "disk_management",
+    "tags": ["lvm", "volume", "create", "storage"],
+    "common_options": {
+      "-s": "Set physical extent size",
+      "-l": "Set maximum logical volumes",
+      "-p": "Set maximum physical volumes"
+    },
+    "examples": [
+      {
+        "command": "sudo vgcreate vg01 /dev/sdb",
+        "explanation": "Create volume group from disk"
+      },
+      {
+        "command": "sudo vgcreate vg01 /dev/sdb /dev/sdc",
+        "explanation": "Create VG from multiple disks"
+      }
+    ],
+    "tips": [
+      "Initialize PV first: pvcreate /dev/sdb",
+      "Default extent size is 4MB",
+      "Use descriptive VG names"
+    ]
+  },
+  
+  "vgextend": {
+    "description": "Extend a volume group by adding physical volumes",
+    "usage": "vgextend VG_NAME PV_PATH",
+    "category": "disk_management",
+    "tags": ["lvm", "volume", "extend", "storage"],
+    "examples": [
+      {
+        "command": "sudo vgextend vg01 /dev/sdc",
+        "explanation": "Add physical volume to VG"
+      }
+    ],
+    "tips": [
+      "PV must be initialized first",
+      "Check space: vgs after extending",
+      "Can add multiple PVs at once"
+    ]
+  },
+  
+  "vgreduce": {
+    "description": "Reduce a volume group by removing physical volumes",
+    "usage": "vgreduce VG_NAME PV_PATH",
+    "category": "disk_management",
+    "tags": ["lvm", "volume", "reduce", "storage"],
+    "examples": [
+      {
+        "command": "sudo vgreduce vg01 /dev/sdc",
+        "explanation": "Remove PV from VG"
+      }
+    ],
+    "tips": [
+      "Move data off PV first: pvmove",
+      "Cannot remove if space needed",
+      "Use --removemissing for failed disks"
+    ]
+  },
+  
+  "vgremove": {
+    "description": "Remove a volume group",
+    "usage": "vgremove VG_NAME",
+    "category": "disk_management",
+    "tags": ["lvm", "volume", "remove", "delete"],
+    "examples": [
+      {
+        "command": "sudo vgremove vg01",
+        "explanation": "Remove volume group"
+      }
+    ],
+    "tips": [
+      "Remove all LVs first",
+      "⚠️ Destroys all data in VG",
+      "Deactivate first: vgchange -an vg01"
+    ]
+  },
+  
+  "vgdisplay": {
+    "description": "Display volume group information in detail",
+    "usage": "vgdisplay [VG_NAME]",
+    "category": "disk_management",
+    "tags": ["lvm", "volume", "info", "display"],
+    "examples": [
+      {
+        "command": "sudo vgdisplay",
+        "explanation": "Show all VG details"
+      },
+      {
+        "command": "sudo vgdisplay vg01",
+        "explanation": "Show specific VG details"
+      }
+    ],
+    "tips": [
+      "Shows total/free extents",
+      "Use vgs for quick summary",
+      "Check PE size and count"
+    ]
+  },
+  
+  "vgscan": {
+    "description": "Scan disks for volume groups",
+    "usage": "vgscan [OPTIONS]",
+    "category": "disk_management",
+    "tags": ["lvm", "volume", "scan", "detect"],
+    "examples": [
+      {
+        "command": "sudo vgscan",
+        "explanation": "Scan and rebuild VG cache"
+      }
+    ],
+    "tips": [
+      "Run after adding new disks",
+      "Rebuilds /etc/lvm/cache",
+      "Useful for recovery"
+    ]
+  },
+  
+  "lvs": {
+    "description": "Display logical volume information (LVM)",
+    "usage": "lvs [OPTIONS] [LV_PATH]",
+    "category": "disk_management",
+    "tags": ["lvm", "logical", "volume", "lv"],
+    "common_options": {
+      "-o": "Specify output columns",
+      "-a": "Show all LVs",
+      "-v": "Verbose output"
+    },
+    "examples": [
+      {
+        "command": "lvs",
+        "explanation": "List all logical volumes"
+      },
+      {
+        "command": "lvs -o +devices",
+        "explanation": "Show with underlying devices"
+      }
+    ],
+    "tips": [
+      "Shows LV size, VG, attributes",
+      "Use lvdisplay for detailed info",
+      "Check LV status with -a flag"
+    ]
+  },
+  
+  "lvcreate": {
+    "description": "Create a logical volume (LVM)",
+    "usage": "lvcreate [OPTIONS] VG_NAME",
+    "category": "disk_management",
+    "tags": ["lvm", "logical", "create", "volume"],
+    "common_options": {
+      "-L": "Size (e.g., 5G)",
+      "-l": "Size in extents",
+      "-n": "LV name",
+      "-s": "Create snapshot"
+    },
+    "examples": [
+      {
+        "command": "sudo lvcreate -L 5G -n lv01 vg01",
+        "explanation": "Create 5GB logical volume"
+      },
+      {
+        "command": "sudo lvcreate -l 100%FREE -n lv01 vg01",
+        "explanation": "Use all free space"
+      },
+      {
+        "command": "sudo lvcreate -L 1G -s -n snap01 /dev/vg01/lv01",
+        "explanation": "Create snapshot"
+      }
+    ],
+    "tips": [
+      "Create filesystem after: mkfs.ext4",
+      "Use descriptive LV names",
+      "Check space: vgs before creating"
+    ]
+  },
+  
+  "lvextend": {
+    "description": "Extend a logical volume",
+    "usage": "lvextend [OPTIONS] LV_PATH",
+    "category": "disk_management",
+    "tags": ["lvm", "logical", "extend", "resize"],
+    "common_options": {
+      "-L": "New size or +size",
+      "-l": "Size in extents",
+      "-r": "Resize filesystem too"
+    },
+    "examples": [
+      {
+        "command": "sudo lvextend -L +2G /dev/vg01/lv01",
+        "explanation": "Extend by 2GB"
+      },
+      {
+        "command": "sudo lvextend -L 10G /dev/vg01/lv01",
+        "explanation": "Extend to 10GB total"
+      },
+      {
+        "command": "sudo lvextend -r -l +100%FREE /dev/vg01/lv01",
+        "explanation": "Extend to use all free space and resize FS"
+      }
+    ],
+    "tips": [
+      "Use -r to auto-resize filesystem",
+      "Or resize manually: resize2fs",
+      "Can extend online (mounted)"
+    ]
+  },
+  
+  "lvreduce": {
+    "description": "Reduce a logical volume",
+    "usage": "lvreduce [OPTIONS] LV_PATH",
+    "category": "disk_management",
+    "tags": ["lvm", "logical", "reduce", "shrink"],
+    "common_options": {
+      "-L": "New size or -size",
+      "-r": "Resize filesystem too"
+    },
+    "examples": [
+      {
+        "command": "sudo lvreduce -L -1G /dev/vg01/lv01",
+        "explanation": "Reduce by 1GB"
+      },
+      {
+        "command": "sudo lvreduce -L 5G /dev/vg01/lv01",
+        "explanation": "Reduce to 5GB total"
+      }
+    ],
+    "tips": [
+      "⚠️ Shrink filesystem first!",
+      "Unmount before shrinking",
+      "Backup data before reducing"
+    ]
+  },
+  
+  "lvremove": {
+    "description": "Remove a logical volume",
+    "usage": "lvremove LV_PATH",
+    "category": "disk_management",
+    "tags": ["lvm", "logical", "remove", "delete"],
+    "examples": [
+      {
+        "command": "sudo lvremove /dev/vg01/lv01",
+        "explanation": "Remove logical volume"
+      }
+    ],
+    "tips": [
+      "⚠️ Destroys all data",
+      "Unmount first",
+      "Use -f to force without confirmation"
+    ]
+  },
+  
+  "lvdisplay": {
+    "description": "Display logical volume information in detail",
+    "usage": "lvdisplay [LV_PATH]",
+    "category": "disk_management",
+    "tags": ["lvm", "logical", "info", "display"],
+    "examples": [
+      {
+        "command": "sudo lvdisplay",
+        "explanation": "Show all LV details"
+      },
+      {
+        "command": "sudo lvdisplay /dev/vg01/lv01",
+        "explanation": "Show specific LV details"
+      }
+    ],
+    "tips": [
+      "Shows size, segments, status",
+      "Use lvs for quick summary",
+      "Check LV path and size"
+    ]
+  },
+  
+  "lspci": {
+    "description": "List all PCI devices",
+    "usage": "lspci [OPTIONS]",
+    "category": "system_info",
+    "tags": ["hardware", "pci", "devices"],
+    "common_options": {
+      "-v": "Verbose output",
+      "-vv": "Very verbose",
+      "-k": "Show kernel drivers",
+      "-t": "Tree format"
+    },
+    "examples": [
+      {
+        "command": "lspci",
+        "explanation": "List all PCI devices"
+      },
+      {
+        "command": "lspci -v",
+        "explanation": "Verbose device information"
+      },
+      {
+        "command": "lspci -k | grep -A 3 VGA",
+        "explanation": "Show graphics card and driver"
+      }
+    ],
+    "tips": [
+      "Useful for hardware identification",
+      "Check driver: lspci -k",
+      "Install: apt install pciutils"
+    ]
+  },
+  
+  "lsusb": {
+    "description": "List USB devices",
+    "usage": "lsusb [OPTIONS]",
+    "category": "system_info",
+    "tags": ["hardware", "usb", "devices"],
+    "common_options": {
+      "-v": "Verbose output",
+      "-t": "Tree format",
+      "-s": "Show specific device"
+    },
+    "examples": [
+      {
+        "command": "lsusb",
+        "explanation": "List all USB devices"
+      },
+      {
+        "command": "lsusb -v",
+        "explanation": "Verbose device information"
+      },
+      {
+        "command": "lsusb -t",
+        "explanation": "Show USB device tree"
+      }
+    ],
+    "tips": [
+      "Shows vendor and product IDs",
+      "Useful for troubleshooting USB",
+      "Install: apt install usbutils"
+    ]
+  },
+  
+  "hdparm": {
+    "description": "Get/set SATA/IDE device parameters",
+    "usage": "hdparm [OPTIONS] DEVICE",
+    "category": "disk_management",
+    "tags": ["disk", "performance", "sata", "benchmark"],
+    "common_options": {
+      "-I": "Display drive information",
+      "-t": "Perform device read timings",
+      "-T": "Perform cache read timings",
+      "-S": "Set standby timeout"
+    },
+    "examples": [
+      {
+        "command": "sudo hdparm -I /dev/sda",
+        "explanation": "Show disk information"
+      },
+      {
+        "command": "sudo hdparm -tT /dev/sda",
+        "explanation": "Test disk read speed"
+      }
+    ],
+    "tips": [
+      "Requires root privileges",
+      "Use for disk benchmarking",
+      "Check SMART status too"
+    ]
   }
 }
