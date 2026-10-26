@@ -2,7 +2,6 @@
 
 **Ask your Linux machine questions in plain English.** LinuxGPT turns a natural-language request into a Linux command, checks it against a safety list, runs it, and shows you the output — and, in educational mode, explains what the command actually does.
 
-![LinuxGPT interactive session](docs/images/session.png)
 <!-- TODO(author): add a terminal screenshot or asciinema link here before publishing. -->
 
 ```text
