@@ -86,7 +86,7 @@ LinuxGPT works in **mock mode** without an API key, but you can enable GPT-4 for
 2. Edit `.env` and add your key:
    ```
    OPENAI_API_KEY=sk-your-key-here
-   OPENAI_MODEL=gpt-4
+   OPENAI_MODEL=gpt-4o-mini
    ```
 
 **Mock mode** provides intelligent responses using pattern matching - perfect for learning and most use cases!

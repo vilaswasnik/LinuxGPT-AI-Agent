@@ -197,7 +197,7 @@ Edit `config.json` to customize:
 {
   "llm": {
     "provider": "openai",
-    "model": "gpt-4",
+    "model": "gpt-4o-mini",
     "temperature": 0.3
   },
   "security": {

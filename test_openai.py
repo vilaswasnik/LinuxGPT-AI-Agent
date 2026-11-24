@@ -44,7 +44,7 @@ def test_openai_api():
         # Make a simple test request
         print("Sending test query...")
         response = client.chat.completions.create(
-            model="gpt-4",
+            model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": "Say 'API test successful' if you receive this message."}

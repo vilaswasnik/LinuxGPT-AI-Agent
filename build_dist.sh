@@ -24,7 +24,7 @@ cp CHANGELOG.md "$DIST_DIR/" 2>/dev/null || true
 cat > "$DIST_DIR/.env.example" << 'EOF'
 # OpenAI API Configuration (optional - works in mock mode without this)
 OPENAI_API_KEY=your-api-key-here
-OPENAI_MODEL=gpt-4
+OPENAI_MODEL=gpt-4o-mini
 EOF
 
 # Create standalone executable wrapper

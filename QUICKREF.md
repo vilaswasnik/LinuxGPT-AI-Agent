@@ -219,7 +219,7 @@ python demo.py
 | Variable | Purpose | Default |
 |----------|---------|---------|
 | `OPENAI_API_KEY` | OpenAI API authentication | None (mock mode) |
-| `OPENAI_MODEL` | Model to use | gpt-4 |
+| `OPENAI_MODEL` | Model to use | gpt-4o-mini |
 
 ## Files Overview
 

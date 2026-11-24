@@ -115,9 +115,9 @@ class LinuxCommandDatabase:
 class LLMInterface:
     """Interface for LLM interaction (OpenAI API compatible)"""
     
-    def __init__(self, api_key: Optional[str] = None, model: str = "gpt-4"):
+    def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
-        self.model = model
+        self.model = model or os.getenv("OPENAI_MODEL", "gpt-4o-mini")
         self.use_mock = not self.api_key  # Use mock if no API key
     
     def query(self, prompt: str, system_prompt: str) -> str:
